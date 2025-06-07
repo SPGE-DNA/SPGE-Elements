@@ -1,0 +1,135 @@
+{
+  "adminSettings": {
+    "theme": "light",
+    "language": "en",
+    "dateFormat": "DD/MM/YYYY",
+    "timeFormat": "24h",
+    "notifications": true,
+    "autoSave": true,
+    "refreshInterval": 30000
+  },
+  "colorCategories": {
+    "science": {
+      "color": "#ff4757",
+      "bgColor": "#ffe8e8",
+      "textColor": "#ffffff",
+      "icon": "🔬",
+      "description": "Science and Laboratory subjects"
+    },
+    "humanities": {
+      "color": "#3742fa",
+      "bgColor": "#e8eaff",
+      "textColor": "#ffffff",
+      "icon": "📚",
+      "description": "Languages, Arts and Literature"
+    },
+    "sports": {
+      "color": "#2ed573",
+      "bgColor": "#e8ffe8",
+      "textColor": "#ffffff",
+      "icon": "⚽",
+      "description": "Sports and Physical activities"
+    },
+    "values": {
+      "color": "#ffa502",
+      "bgColor": "#fff8e8",
+      "textColor": "#ffffff",
+      "icon": "💡",
+      "description": "School values and ethics"
+    },
+    "events": {
+      "color": "#a55eea",
+      "bgColor": "#f8e8ff",
+      "textColor": "#ffffff",
+      "icon": "🎉",
+      "description": "Events and celebrations"
+    },
+    "admin": {
+      "color": "#747d8c",
+      "bgColor": "#f0f0f0",
+      "textColor": "#ffffff",
+      "icon": "🏢",
+      "description": "Administration and management"
+    },
+    "custom1": {
+      "color": "#ff6b6b",
+      "bgColor": "#ffe0e0",
+      "textColor": "#ffffff",
+      "icon": "🎯",
+      "description": "Custom category 1"
+    },
+    "custom2": {
+      "color": "#4ecdc4",
+      "bgColor": "#e0fffe",
+      "textColor": "#ffffff",
+      "icon": "🚀",
+      "description": "Custom category 2"
+    }
+  },
+  "scheduleSettings": {
+    "weekStartsOn": "monday",
+    "timeSlots": [
+      "08:00-09:00",
+      "09:00-10:00",
+      "10:00-11:00",
+      "11:00-12:00",
+      "12:00-13:00",
+      "13:00-14:00",
+      "14:00-15:00",
+      "15:00-16:00",
+      "16:00-17:00"
+    ],
+    "breakTimes": [
+      {"name": "Morning Break", "time": "10:30-10:45"},
+      {"name": "Lunch Break", "time": "12:30-13:30"}
+    ],
+    "showWeekends": false,
+    "defaultDuration": 60
+  },
+  "permissions": {
+    "canEditElements": ["admin", "teacher"],
+    "canEditSchedule": ["admin", "coordinator"],
+    "canViewAnalytics": ["admin", "teacher", "coordinator"],
+    "canExportData": ["admin"],
+    "canManageUsers": ["admin"]
+  },
+  "dashboard": {
+    "widgets": [
+      {"id": "stats", "enabled": true, "position": 1},
+      {"id": "schedule", "enabled": true, "position": 2},
+      {"id": "elements", "enabled": true, "position": 3},
+      {"id": "analytics", "enabled": true, "position": 4},
+      {"id": "custom1", "enabled": false, "position": 5},
+      {"id": "custom2", "enabled": false, "position": 6}
+    ]
+  },
+  "customSections": {
+    "custom1": {
+      "title": "Resource Management",
+      "description": "Manage school resources and equipment",
+      "icon": "📦",
+      "color": "#ff9ff3",
+      "enabled": false,
+      "fields": [
+        {"name": "resourceName", "type": "text", "label": "Resource Name"},
+        {"name": "quantity", "type": "number", "label": "Quantity"},
+        {"name": "location", "type": "text", "label": "Location"},
+        {"name": "status", "type": "select", "label": "Status", "options": ["Available", "In Use", "Maintenance", "Retired"]}
+      ]
+    },
+    "custom2": {
+      "title": "Event Management",
+      "description": "Plan and manage school events",
+      "icon": "📅",
+      "color": "#54a0ff",
+      "enabled": false,
+      "fields": [
+        {"name": "eventName", "type": "text", "label": "Event Name"},
+        {"name": "date", "type": "date", "label": "Event Date"},
+        {"name": "time", "type": "time", "label": "Event Time"},
+        {"name": "venue", "type": "text", "label": "Venue"},
+        {"name": "participants", "type": "number", "label": "Expected Participants"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,2747 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Himiq School</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/utilities.js"></script>
+    <!-- Class management functionality has been removed -->
+    <!-- <script src="js/class-management.js"></script> -->
+    <style>        /* ===== ENHANCED ADMIN PANEL STYLING ===== */
+        :root {
+            --admin-primary: #667eea;
+            --admin-secondary: #764ba2;
+            --admin-success: #10b981;
+            --admin-warning: #f59e0b;
+            --admin-danger: #ef4444;
+            --admin-info: #3b82f6;
+            --admin-dark: #1f2937;
+            --admin-light: #f8fafc;
+            --admin-surface: #ffffff;
+            --admin-border: #e5e7eb;
+            --admin-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --admin-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --card-background: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --admin-surface: #374151;
+            --admin-border: #4b5563;
+            --admin-light: #1f2937;
+            --admin-dark: #f9fafb;
+            --card-background: #374151;
+            --border-color: #4b5563;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--admin-light);
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: var(--admin-shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .admin-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .admin-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .admin-tabs {
+            display: flex;
+            background: var(--admin-surface);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--admin-shadow);
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            position: relative;
+            min-width: 120px;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-button:hover:not(.active) {
+            background: var(--admin-border);
+            transform: translateY(-1px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Enhanced Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            min-height: 44px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--admin-success), #059669);
+            color: white;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--admin-danger), #dc2626);
+            color: white;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--admin-warning), #d97706);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+            box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            min-height: 36px;
+        }
+
+        /* Form Styling */
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--admin-border);
+            border-radius: 8px;
+            background: var(--admin-surface);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--admin-primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Action Cards */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .action-card {
+            background: var(--admin-surface);
+            border: 2px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-card:hover {
+            border-color: var(--admin-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .action-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--admin-surface);
+            margin: 2rem;
+            padding: 0;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-content form {
+            padding: 2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--admin-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--admin-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            border-color: var(--admin-primary);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--admin-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Schedule Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .schedule-card {
+            background: var(--admin-surface);
+            border: 2px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-card:hover {
+            border-color: var(--admin-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .schedule-card h3 {
+            color: var(--admin-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subject-symbol {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .time-slot {
+            background: var(--admin-light);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            border-left: 4px solid var(--admin-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Day Schedule */
+        .day-schedule {
+            margin-bottom: 2rem;
+        }
+
+        .day-header {
+            background: var(--admin-primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .day-content {
+            background: var(--admin-surface);
+            border: 2px solid var(--admin-primary);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 1rem;
+        }
+
+        /* Element Grid */
+        .element-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .element-card {
+            background: var(--admin-surface);
+            border: 2px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .element-card:hover {
+            border-color: var(--admin-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .text-primary { color: var(--admin-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            .admin-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                min-width: auto;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+        :root {
+            --admin-primary: #667eea;
+            --admin-secondary: #764ba2;
+            --admin-success: #10b981;
+            --admin-warning: #f59e0b;
+            --admin-danger: #ef4444;
+            --admin-info: #3b82f6;
+            --admin-dark: #1f2937;
+            --admin-light: #f8fafc;
+            --admin-surface: #ffffff;
+            --admin-border: #e5e7eb;
+            --admin-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --admin-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-theme {
+            --admin-surface: #374151;
+            --admin-border: #4b5563;
+            --admin-light: #1f2937;
+            --admin-dark: #f9fafb;
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--admin-light);
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+            padding: 2rem;
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: var(--admin-shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .admin-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .admin-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .admin-tabs {
+            display: flex;
+            background: var(--admin-surface);
+            border-radius: 12px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--admin-shadow);
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            position: relative;
+            min-width: 120px;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--admin-primary), var(--admin-secondary));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-button:hover:not(.active) {
+            background: var(--admin-border);
+            transform: translateY(-1px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .schedule-card {
+            background: var(--background-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .schedule-card h3 {
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subject-symbol {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .time-slot {
+            background: var(--surface-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            border-left: 4px solid var(--accent-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .admin-form {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--background-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .day-schedule {
+            margin-bottom: 2rem;
+        }
+
+        .day-header {
+            background: var(--accent-primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .day-content {
+            background: var(--surface-color);
+            border: 2px solid var(--accent-primary);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 1rem;
+        }
+
+        /* Class Management Styles */
+        .class-card {
+            background: var(--admin-surface);
+            border: 2px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card:hover {
+            border-color: var(--admin-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .class-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .class-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .class-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .class-actions button {
+            flex: 1;
+        }
+
+        /* Schedule Table Enhancements */
+        .schedule-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--input-background);
+            color: var(--text-primary);
+        }
+
+        .subject-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .schedule-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-background);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background: var(--input-background);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .data-table tr:hover {
+            background: var(--hover-background);
+        }
+
+        .data-table .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            border-color: #bd2130;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            .admin-tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+              .tab-button.active {
+                border-left-color: var(--accent-primary);
+            }
+        }
+
+        /* Color Management Styles */
+        .color-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-category-card {
+            background: var(--card-background);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .color-category-card:hover {
+            border-color: var(--admin-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--admin-shadow-lg);
+        }
+
+        .color-preview {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .color-details {
+            flex: 1;
+        }
+
+        .color-details h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .color-inputs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .color-inputs input[type="color"] {
+            width: 40px;
+            height: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .new-category-form {
+            background: var(--card-background);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .color-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .admin-margin-small {
+            margin-bottom: 1rem;
+        }
+
+        .admin-margin-top {
+            margin-top: 1.5rem;
+        }
+
+        .admin-subsection-header-spaced {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🧪 Himiq School</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="experiments.html">Laboratory</a></li>            <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1>🔬 Admin Panel</h1>
+                <p>Manage periodic table elements and school subjects</p>
+            </div>            <div class="admin-tabs">
+                <button class="tab-button active" onclick="showTab('overview')">📊 Overview</button>
+                <button class="tab-button" onclick="showTab('elements')">⚛️ Elements</button>
+                <button class="tab-button" onclick="showTab('colors')">🎨 Colors</button>                <button class="tab-button hidden-tab" onclick="showTab('custom1')" id="custom1Tab">📦 Resources</button>
+                <button class="tab-button hidden-tab" onclick="showTab('custom2')" id="custom2Tab">📅 Events</button>
+                <button class="tab-button" onclick="showTab('settings')">⚙️ Settings</button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">⚛️</div>
+                        <div class="stat-number" id="totalElements">30</div>
+                        <div class="stat-label">Total Elements</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-number" id="totalTeachers">18</div>
+                        <div class="stat-label">Teaching Staff</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🕒</div>
+                        <div class="stat-number" id="weeklyHours">45</div>
+                        <div class="stat-label">Weekly Hours</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-number" id="activeSubjects">15</div>
+                        <div class="stat-label">Active Subjects</div>
+                    </div>
+                </div>
+
+                <h3 class="admin-section-header">🚀 Quick Actions</h3>
+                <div class="action-grid">
+                    <div class="action-card">
+                        <h3>⚛️ Element Management</h3>
+                        <p>Add new elements, modify existing ones, or remove outdated entries from the periodic table.</p>
+                        <button class="btn btn-primary" onclick="showTab('elements')">
+                            <span>Manage Elements</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+                    <div class="action-card">
+                        <h3>📅 Schedule Editor</h3>
+                        <p>Update class schedules, assign teachers to subjects, and manage time slots.</p>
+                        <button class="btn btn-primary" onclick="showTab('schedule')">
+                            <span>Edit Schedule</span>
+                            <span>→</span>
+                        </button>
+                    </div>                    <div class="action-card">
+                        <h3>💾 Data Management</h3>
+                        <p>Export data, create backups, or import new configurations.</p>
+                        <button class="btn btn-secondary" onclick="exportData()">
+                            <span>Export Data</span>
+                            <span>⬇️</span>
+                        </button>
+                    </div>
+                </div><div class="admin-form">
+                    <h3 class="admin-system-status">🔍 System Status</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Database Status</label>
+                            <div class="admin-status-item">
+                                <span class="admin-status-indicator">●</span>
+                                <span>Connected</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Backup</label>
+                            <div>2 hours ago</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Active Sessions</label>
+                            <div>3 users online</div>
+                        </div>                        <div class="form-group">
+                            <label>System Load</label>
+                            <div class="admin-status-item">
+                                <div class="admin-progress-bar">
+                                    <div class="admin-progress-fill"></div>
+                                </div>
+                                <span>30%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            <!-- Elements Management Tab -->
+            <div id="elements" class="tab-content">
+                <div class="admin-element-header">
+                    <h2 class="admin-element-title">⚛️ Element Management</h2>
+                    <button class="btn btn-success" onclick="openElementModal()">
+                        <span>➕</span>
+                        <span>Add New Element</span>
+                    </button>
+                </div>                <div class="admin-form">
+                    <h3 class="admin-search-section">🔍 Search & Filter</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Search Elements</label>
+                            <input type="text" class="form-control" id="elementSearch" placeholder="Search by name, symbol, or category..." oninput="filterElements()">
+                        </div>
+                        <div class="form-group">
+                            <label>Filter by Category</label>
+                            <select class="form-control" id="categoryFilter" onchange="filterElements()">
+                                <option value="">All Categories</option>
+                                <option value="science">Science & Technology</option>
+                                <option value="humanities">Humanities & Languages</option>
+                                <option value="sports">Sports & Activities</option>
+                                <option value="values">School Values</option>
+                                <option value="events">Events & Clubs</option>
+                                <option value="admin">Administration</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Sort By</label>
+                            <select class="form-control" id="sortBy" onchange="sortElements()">
+                                <option value="number">Atomic Number</option>
+                                <option value="name">Name</option>
+                                <option value="symbol">Symbol</option>
+                                <option value="category">Category</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>                <div id="elementsContainer" class="element-grid">
+                    <!-- Elements will be populated here by JavaScript -->
+                </div>
+            </div>
+            </div>
+
+            <!-- Color Management Tab -->
+            <div id="colors" class="tab-content">
+                <h2 class="admin-section-header">🎨 Color Category Manager</h2>
+                
+                <div class="admin-form">
+                    <h3 class="admin-subsection-header">🎨 Current Color Categories</h3>
+                    <div class="color-categories" id="colorCategoriesContainer">
+                        <!-- Color categories will be populated here by JavaScript -->
+                    </div>
+                    
+                    <h3 class="admin-subsection-header-spaced">➕ Add New Color Category</h3>                    <div class="new-category-form admin-form-container">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Category Name</label>
+                                <input type="text" class="form-control" id="newCategoryName" placeholder="e.g., Arts & Crafts">
+                            </div>
+                            <div class="form-group">
+                                <label>Category ID</label>
+                                <input type="text" class="form-control" id="newCategoryId" placeholder="e.g., arts-crafts">
+                            </div>
+                            <div class="form-group">
+                                <label>Primary Color</label>
+                                <input type="color" class="form-control" id="newCategoryColor" value="#e74c3c">
+                            </div>
+                            <div class="form-group">
+                                <label>Background Color</label>
+                                <input type="color" class="form-control" id="newCategoryBgColor" value="#fef2f2">
+                            </div>
+                            <div class="form-group">
+                                <label>Text Color</label>
+                                <input type="color" class="form-control" id="newCategoryTextColor" value="#2d3748">
+                            </div>
+                            <div class="form-group">
+                                <label>Icon/Emoji</label>
+                                <input type="text" class="form-control" id="newCategoryIcon" placeholder="🎨" maxlength="2">
+                            </div>
+                        </div>                        <div class="admin-margin-small">
+                            <label>Description</label>
+                            <textarea class="form-control" id="newCategoryDescription" placeholder="Brief description of this category..." rows="2"></textarea>
+                        </div>                        <div class="admin-margin-top">
+                            <button class="btn btn-success" onclick="addNewColorCategory()">
+                                <span>✨</span>
+                                <span>Create New Category</span>
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetNewCategoryForm()">
+                                <span>🔄</span>
+                                <span>Reset Form</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="color-actions">
+                        <button class="btn btn-success" onclick="saveColorCategory()">
+                            <span>💾</span>
+                            <span>Save All Changes</span>
+                        </button>
+                        <button class="btn btn-warning" onclick="resetColorCategories()">
+                            <span>⭕</span>
+                            <span>Reset to Defaults</span>
+                        </button>
+                        <button class="btn btn-info" onclick="exportColorScheme()">
+                            <span>📄</span>
+                            <span>Export Color Scheme</span>
+                        </button>
+                    </div>
+                </div>
+            </div><!-- Custom Section 1: Resources -->
+            <div id="custom1" class="tab-content">                <div class="admin-header-row">
+                    <h2 class="admin-header-title">📦 Resource Management</h2>
+                    <button class="btn btn-success" onclick="showResourceModal()">
+                        <span>➕</span>
+                        <span>Add Resource</span>
+                    </button>
+                </div>
+
+                <!-- Resource Statistics -->
+                <div class="resource-stats">
+                    <div class="resource-stat-card">
+                        <div class="resource-stat-number" id="total-resources">0</div>
+                        <div class="resource-stat-label">Total Resources</div>
+                    </div>
+                    <div class="resource-stat-card">
+                        <div class="resource-stat-number" id="available-resources">0</div>
+                        <div class="resource-stat-label">Available</div>
+                    </div>
+                    <div class="resource-stat-card">
+                        <div class="resource-stat-number" id="in-use-resources">0</div>
+                        <div class="resource-stat-label">In Use</div>
+                    </div>
+                    <div class="resource-stat-card">
+                        <div class="resource-stat-number" id="maintenance-resources">0</div>
+                        <div class="resource-stat-label">Maintenance</div>
+                    </div>
+                </div>
+
+                <!-- Resources Table -->
+                <div class="resources-table">
+                    <table id="resources-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Location</th>
+                                <th>Quantity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Resources will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>            <!-- Custom Section 2: Events -->
+            <div id="custom2" class="tab-content">                <div class="admin-header-row">
+                    <h2 class="admin-header-title">📅 Event Management</h2>
+                    <button class="btn btn-success" onclick="showEventModal()">
+                        <span>➕</span>
+                        <span>Add Event</span>
+                    </button>
+                </div>
+
+                <!-- Event Statistics -->
+                <div class="event-stats">
+                    <div class="event-stat-card">
+                        <div class="event-stat-number" id="total-events">0</div>
+                        <div class="event-stat-label">Total Events</div>
+                    </div>
+                    <div class="event-stat-card">
+                        <div class="event-stat-number" id="upcoming-events">0</div>
+                        <div class="event-stat-label">Upcoming</div>
+                    </div>
+                    <div class="event-stat-card">
+                        <div class="event-stat-number" id="completed-events">0</div>
+                        <div class="event-stat-label">Completed</div>
+                    </div>
+                    <div class="event-stat-card">
+                        <div class="event-stat-number" id="total-participants">0</div>
+                        <div class="event-stat-label">Participants</div>
+                    </div>
+                </div>
+
+                <!-- Events Table -->
+                <div class="events-table">
+                    <table id="events-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
+                                <th>Participants</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Events will be populated here -->
+                        </tbody>
+                    </table>
+                </div>            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <h2 class="admin-section-header">⚙️ System Settings</h2>
+                
+                <div class="admin-form">
+                    <h3 class="admin-subsection-header">🎨 Appearance</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Theme</label>
+                            <select class="form-control">
+                                <option>Auto (System)</option>
+                                <option>Light Mode</option>
+                                <option>Dark Mode</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Primary Color</label>
+                            <input type="color" class="form-control" value="#667eea">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-form">
+                    <h3 class="admin-subsection-header">🔒 Security</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Session Timeout (minutes)</label>
+                            <select class="form-control">
+                                <option>30</option>
+                                <option>60</option>
+                                <option>120</option>
+                                <option>Never</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Enable 2FA</label>                            <div class="admin-2fa-container">
+                                <input type="checkbox" id="enable2fa">
+                                <label for="enable2fa" class="admin-2fa-label">Two-factor authentication</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-form">
+                    <h3 class="admin-subsection-header">💾 Data Management</h3>
+                    <div class="action-grid">
+                        <div class="action-card">
+                            <h3>📥 Import Data</h3>
+                            <p>Import elements and schedules from external files.</p>
+                            <input type="file" class="form-control" accept=".json,.csv">
+                            <button class="btn btn-primary admin-button-spacing">Import</button>
+                        </div>
+                        <div class="action-card">
+                            <h3>📤 Export Data</h3>
+                            <p>Download complete database backup.</p>
+                            <button class="btn btn-success" onclick="exportData()">Export JSON</button>
+                            <button class="btn btn-secondary" onclick="exportCSV()">Export CSV</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Element Modal -->
+        <div id="elementModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>⚛️ Element Editor</h2>
+                    <button class="close-btn" onclick="closeElementModal()">&times;</button>
+                </div>
+                <form id="elementForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Element Number</label>
+                            <input type="number" class="form-control" id="modalElementNumber" min="1" max="118">
+                        </div>
+                        <div class="form-group">
+                            <label>Symbol</label>
+                            <input type="text" class="form-control" id="modalElementSymbol" maxlength="3" placeholder="Ma">
+                        </div>
+                        <div class="form-group">
+                            <label>Element Name</label>
+                            <input type="text" class="form-control" id="modalElementName" placeholder="Mathematics">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-control" id="modalElementCategory">
+                                <option value="science">Science & Technology</option>
+                                <option value="humanities">Humanities & Languages</option>
+                                <option value="sports">Sports & Activities</option>
+                                <option value="values">School Values</option>
+                                <option value="events">Events & Clubs</option>
+                                <option value="admin">Administration</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Teacher/Contact</label>
+                            <input type="text" class="form-control" id="modalElementContact" placeholder="Dr. Smith">
+                        </div>
+                        <div class="form-group">
+                            <label>Location/Room</label>
+                            <input type="text" class="form-control" id="modalElementLocation" placeholder="Room 201">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" id="modalElementDescription" rows="3" placeholder="Brief description of the subject or department..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Fun Facts (one per line)</label>
+                        <textarea class="form-control" id="modalElementFacts" rows="3" placeholder="Founded in 1995&#10;Award-winning department&#10;State-of-the-art equipment"></textarea>
+                    </div>                    <div class="admin-modal-footer">
+                        <button type="button" class="btn btn-success" onclick="saveElement()">
+                            <span>💾</span>
+                            <span>Save Element</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeElementModal()">
+                            <span>❌</span>
+                            <span>Cancel</span>
+                        </button>                        <button type="button" class="btn btn-danger admin-hidden" id="deleteElementBtn" onclick="deleteElement()">
+                            <span>🗑️</span>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Schedule Modal -->
+        <div id="scheduleModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📅 Schedule Editor</h2>
+                    <button class="close-btn" onclick="closeScheduleModal()">&times;</button>
+                </div>
+                <form id="scheduleForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select class="form-control" id="modalSubject">
+                                <option value="">Select subject...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Day</label>
+                            <select class="form-control" id="modalDay">
+                                <option value="">Select day...</option>
+                                <option value="monday">Monday</option>
+                                <option value="tuesday">Tuesday</option>
+                                <option value="wednesday">Wednesday</option>
+                                <option value="thursday">Thursday</option>
+                                <option value="friday">Friday</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Start Time</label>
+                            <input type="time" class="form-control" id="modalStartTime">
+                        </div>
+                        <div class="form-group">
+                            <label>End Time</label>
+                            <input type="time" class="form-control" id="modalEndTime">
+                        </div>
+                    </div>                    <div class="admin-modal-footer">
+                        <button type="button" class="btn btn-success" onclick="saveScheduleSlot()">
+                            <span>💾</span>
+                            <span>Save Slot</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeScheduleModal()">
+                            <span>❌</span>
+                            <span>Cancel</span>
+                        </button>
+                    </div></form>
+            </div>
+        </div>
+
+        <!-- Resource Management Modal -->
+        <div id="resourceModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📦 Resource Editor</h2>
+                    <button class="close-btn" onclick="closeResourceModal()">&times;</button>
+                </div>
+                <form id="resourceForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Resource Name</label>
+                            <input type="text" class="form-control" id="modalResourceName" placeholder="e.g., Microscope Set">
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" class="form-control" id="modalResourceQuantity" min="1" placeholder="10">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" id="modalResourceLocation" placeholder="Lab A, Room 201">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" id="modalResourceStatus">
+                                <option value="Available">Available</option>
+                                <option value="In Use">In Use</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Retired">Retired</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-control" id="modalResourceCategory">
+                                <option value="Equipment">Equipment</option>
+                                <option value="Books">Books</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Supplies">Supplies</option>
+                                <option value="Furniture">Furniture</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Responsible Person</label>
+                            <input type="text" class="form-control" id="modalResourceResponsible" placeholder="Dr. Smith">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" id="modalResourceDescription" rows="3" placeholder="Resource description and notes..."></textarea>
+                    </div>                    <div class="admin-modal-footer">
+                        <button type="button" class="btn btn-success" onclick="saveResource()">
+                            <span>💾</span>
+                            <span>Save Resource</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeResourceModal()">
+                            <span>❌</span>
+                            <span>Cancel</span>
+                        </button>                        <button type="button" class="btn btn-danger admin-hidden" id="deleteResourceBtn" onclick="deleteResource()">
+                            <span>🗑️</span>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Event Management Modal -->
+        <div id="eventModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>📅 Event Editor</h2>
+                    <button class="close-btn" onclick="closeEventModal()">&times;</button>
+                </div>
+                <form id="eventForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Event Name</label>
+                            <input type="text" class="form-control" id="modalEventName" placeholder="e.g., Science Fair 2025">
+                        </div>
+                        <div class="form-group">
+                            <label>Event Date</label>
+                            <input type="date" class="form-control" id="modalEventDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Event Time</label>
+                            <input type="time" class="form-control" id="modalEventTime">
+                        </div>
+                        <div class="form-group">
+                            <label>Duration (hours)</label>
+                            <input type="number" class="form-control" id="modalEventDuration" min="0.5" step="0.5" placeholder="2">
+                        </div>
+                        <div class="form-group">
+                            <label>Venue</label>
+                            <input type="text" class="form-control" id="modalEventVenue" placeholder="Main Hall, Gymnasium">
+                        </div>
+                        <div class="form-group">
+                            <label>Expected Participants</label>
+                            <input type="number" class="form-control" id="modalEventParticipants" min="1" placeholder="150">
+                        </div>
+                        <div class="form-group">
+                            <label>Event Type</label>
+                            <select class="form-control" id="modalEventType">
+                                <option value="Academic">Academic</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Cultural">Cultural</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="Meeting">Meeting</option>
+                                <option value="Ceremony">Ceremony</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Organizer</label>
+                            <input type="text" class="form-control" id="modalEventOrganizer" placeholder="Science Department">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Event Description</label>
+                        <textarea class="form-control" id="modalEventDescription" rows="3" placeholder="Event details and agenda..."></textarea>
+                    </div>                    <div class="admin-modal-footer">
+                        <button type="button" class="btn btn-success" onclick="saveEvent()">
+                            <span>💾</span>
+                            <span>Save Event</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeEventModal()">
+                            <span>❌</span>
+                            <span>Cancel</span>
+                        </button>                        <button type="button" class="btn btn-danger admin-hidden" id="deleteEventBtn" onclick="deleteEvent()">
+                            <span>🗑️</span>
+                            <span>Delete</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>    <script src="js/fallback-data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Admin Panel JavaScript
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab and activate button
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Load specific tab content
+            if (tabName === 'schedule') {
+                loadScheduleDisplay();
+                loadSubjectOptions();
+            } else if (tabName === 'elements') {
+                loadElementsList();
+            } else if (tabName === 'classes') {
+                loadClassesList();
+            }
+        }        function loadScheduleDisplay() {
+            try {
+                const scheduleDisplay = document.getElementById('scheduleDisplay');
+                if (!scheduleDisplay) {
+                    console.error('Schedule display element not found');
+                    return;
+                }
+                
+                const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+                const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+                
+                let html = '';
+                
+                days.forEach((day, index) => {
+                    html += `
+                        <div class="day-schedule">
+                            <div class="day-header">${dayNames[index]}</div>
+                            <div class="day-content" id="${day}Schedule">
+                                <div class="schedule-grid" id="${day}Grid"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                scheduleDisplay.innerHTML = html;
+                
+                // Populate with current schedule data
+                if (typeof schoolElements !== 'undefined') {
+                    schoolElements.forEach(element => {
+                        if (element.schedule) {
+                            days.forEach(day => {
+                                if (element.schedule[day] && element.schedule[day].length > 0) {
+                                    const dayGrid = document.getElementById(day + 'Grid');
+                                    if (dayGrid) {
+                                        element.schedule[day].forEach(time => {
+                                            const timeCard = document.createElement('div');
+                                            timeCard.className = 'schedule-card';                                            timeCard.innerHTML = `
+                                                <h3>
+                                                    <span class="admin-schedule-symbol subject-symbol" style="background-color: var(--${element.category})">${element.symbol}</span>
+                                                    ${element.name}
+                                                </h3>
+                                                <div class="time-slot">${time}</div>
+                                                <p><strong>Teacher:</strong> ${element.contact}</p>
+                                                <p><strong>Room:</strong> ${element.location}</p>
+                                            `;
+                                            dayGrid.appendChild(timeCard);
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading schedule display:', error);
+            }
+        }        function loadSubjectOptions() {
+            try {
+                const select = document.getElementById('subjectSelect');
+                const modalSelect = document.getElementById('modalSubject');
+                
+                if (select) {
+                    select.innerHTML = '<option value="">Select a subject...</option>';
+                }
+                if (modalSelect) {
+                    modalSelect.innerHTML = '<option value="">Select subject...</option>';
+                }
+                
+                if (typeof schoolElements !== 'undefined') {
+                    schoolElements.forEach(element => {
+                        const option1 = document.createElement('option');
+                        option1.value = element.symbol;
+                        option1.textContent = `${element.symbol} - ${element.name}`;
+                        
+                        const option2 = document.createElement('option');
+                        option2.value = element.symbol;
+                        option2.textContent = `${element.symbol} - ${element.name}`;
+                        
+                        if (select) select.appendChild(option1);
+                        if (modalSelect) modalSelect.appendChild(option2);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading subject options:', error);
+            }
+        }
+
+        function loadElementsList() {
+            try {
+                const container = document.getElementById('elementsContainer');
+                if (!container) {
+                    console.error('Elements container not found');
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                if (typeof schoolElements === 'undefined') {
+                    container.innerHTML = '<p>No elements data available</p>';
+                    return;
+                }
+                  const grid = document.createElement('div');
+                grid.className = 'element-grid';
+                
+                schoolElements.forEach(element => {                    const card = document.createElement('div');
+                    card.className = 'element-card';
+                      card.innerHTML = `
+                        <div class="admin-element-header-row">
+                            <div class="admin-element-symbol subject-symbol" style="background-color: var(--${element.category});">
+                                ${element.symbol}
+                            </div>                            <div class="admin-element-info">
+                                <h3>${element.name}</h3>
+                                <p>Element #${element.number}</p>
+                            </div>
+                        </div>
+                        <div class="admin-element-details">
+                            <p><strong>Category:</strong> ${element.category}</p>
+                            <p><strong>Teacher:</strong> ${element.contact}</p>
+                            <p><strong>Room:</strong> ${element.location}</p>
+                        </div>
+                        <div class="admin-element-actions">
+                            <button class="btn btn-primary btn-small" onclick="editElement('${element.symbol}')">
+                                <span>✏️</span>
+                                <span>Edit</span>
+                            </button>
+                            <button class="btn btn-danger btn-small" onclick="deleteElementConfirm('${element.symbol}')">
+                                <span>🗑️</span>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+                
+                container.appendChild(grid);
+            } catch (error) {
+                console.error('Error loading elements list:', error);
+            }
+        }
+
+        function loadClassesList() {
+            try {
+                const container = document.getElementById('classListContainer');
+                if (!container) {
+                    console.error('Class list container not found');
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                if (typeof schoolClasses === 'undefined' || schoolClasses.length === 0) {
+                    container.innerHTML = '<p>No classes found. Please add a new class.</p>';
+                    return;
+                }
+                
+                schoolClasses.forEach(schoolClass => {
+                    const card = document.createElement('div');
+                    card.className = 'class-card';
+                    card.innerHTML = `
+                        <div class="class-header">
+                            <div class="class-title">${schoolClass.name}</div>
+                            <div class="class-actions">
+                                <button class="btn btn-primary btn-small" onclick="editClass('${schoolClass.id}')">
+                                    <span>✏️</span>
+                                    <span>Edit</span>
+                                </button>
+                                <button class="btn btn-danger btn-small" onclick="deleteClass('${schoolClass.id}')">
+                                    <span>🗑️</span>
+                                    <span>Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="class-details">
+                            <p><strong>Teacher:</strong> ${schoolClass.teacher}</p>
+                            <p><strong>Room:</strong> ${schoolClass.room}</p>
+                            <p><strong>Schedule:</strong></p>
+                            <div class="schedule-grid" id="class-${schoolClass.id}-schedule">
+                                <!-- Class schedule will be populated here -->
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                    
+                    // Load class schedule
+                    loadClassSchedule(schoolClass.id, schoolClass.schedule);
+                });
+            } catch (error) {
+                console.error('Error loading classes list:', error);
+            }
+        }
+
+        function loadClassSchedule(classId, schedule) {
+            try {
+                const scheduleContainer = document.getElementById(`class-${classId}-schedule`);
+                if (!scheduleContainer) return;
+                
+                scheduleContainer.innerHTML = '';
+                
+                if (!schedule || schedule.length === 0) {
+                    scheduleContainer.innerHTML = '<p>No schedule assigned to this class.</p>';
+                    return;
+                }
+                
+                schedule.forEach(timeSlot => {
+                    const timeCard = document.createElement('div');
+                    timeCard.className = 'schedule-card';
+                    timeCard.innerHTML = `
+                        <div class="time-slot">${timeSlot.time}</div>
+                        <p><strong>Subject:</strong> ${timeSlot.subject}</p>
+                        <p><strong>Teacher:</strong> ${timeSlot.teacher}</p>
+                        <p><strong>Room:</strong> ${timeSlot.room}</p>
+                    `;
+                    scheduleContainer.appendChild(timeCard);
+                });
+            } catch (error) {
+                console.error('Error loading class schedule:', error);
+            }        }
+
+        // Element Management Functions
+        function editElement(symbol) {
+            openElementModal(symbol);
+        }
+
+        // Modal Functions
+        function openElementModal(elementSymbol = null) {
+            try {
+                const modal = document.getElementById('elementModal');
+                if (!modal) return;
+                
+                modal.style.display = 'flex';
+                
+                // Reset form
+                document.getElementById('elementForm').reset();
+                  if (elementSymbol && typeof schoolElements !== 'undefined') {
+                    const element = schoolElements.find(el => el.symbol === elementSymbol);
+                    if (element) {
+                        document.getElementById('modalElementNumber').value = element.number;
+                        document.getElementById('modalElementSymbol').value = element.symbol;
+                        document.getElementById('modalElementName').value = element.name;
+                        document.getElementById('modalElementCategory').value = element.category;
+                        document.getElementById('modalElementContact').value = element.contact || '';
+                        document.getElementById('modalElementLocation').value = element.location || '';
+                        document.getElementById('modalElementDescription').value = element.description || '';
+                        document.getElementById('modalElementFacts').value = element.facts ? element.facts.join('\n') : '';
+                        
+                        document.getElementById('deleteElementBtn').classList.remove('admin-hidden');
+                        document.getElementById('deleteElementBtn').classList.add('admin-visible');
+                    }
+                } else {
+                    document.getElementById('deleteElementBtn').classList.add('admin-hidden');
+                    document.getElementById('deleteElementBtn').classList.remove('admin-visible');
+                }
+            } catch (error) {
+                console.error('Error opening element modal:', error);
+            }
+        }
+
+        function closeElementModal() {
+            const modal = document.getElementById('elementModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function openScheduleModal() {
+            const modal = document.getElementById('scheduleModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                document.getElementById('scheduleForm').reset();
+            }
+        }
+
+        function closeScheduleModal() {
+            const modal = document.getElementById('scheduleModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        function openClassModal(classId = null) {
+            const modal = document.getElementById('classModal');
+            const form = document.getElementById('classForm');
+            
+            if (classId) {
+                const schoolClass = schoolClasses.find(c => c.id === classId);
+                if (schoolClass) {
+                    document.getElementById('modalClassId').value = schoolClass.id;
+                    document.getElementById('modalClassName').value = schoolClass.name;
+                    document.getElementById('modalClassTeacher').value = schoolClass.teacher;
+                    document.getElementById('modalClassRoom').value = schoolClass.room;
+                }
+            } else {
+                form.reset();
+                document.getElementById('modalClassId').value = '';
+            }
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeClassModal() {
+            const modal = document.getElementById('classModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }        function saveElement() {
+            try {
+                const number = parseInt(document.getElementById('modalElementNumber').value);
+                const symbol = document.getElementById('modalElementSymbol').value.trim();
+                const name = document.getElementById('modalElementName').value.trim();
+                const category = document.getElementById('modalElementCategory').value;
+                const contact = document.getElementById('modalElementContact').value.trim();
+                const location = document.getElementById('modalElementLocation').value.trim();
+                const description = document.getElementById('modalElementDescription').value.trim();
+                const facts = document.getElementById('modalElementFacts').value.trim().split('\n').filter(f => f.trim());
+                
+                // Validation
+                if (!number || number < 1 || number > 118) {
+                    alert('Please enter a valid element number between 1 and 118');
+                    return;
+                }
+                
+                if (!symbol || symbol.length > 3) {
+                    alert('Please enter a valid symbol (max 3 characters)');
+                    return;
+                }
+                
+                if (!name) {
+                    alert('Please enter an element name');
+                    return;
+                }
+                
+                if (!category) {
+                    alert('Please select a category');
+                    return;
+                }
+                
+                // Initialize schoolElements if needed
+                if (typeof window.schoolElements === 'undefined') {
+                    window.schoolElements = [];
+                }
+                
+                // Check for duplicate numbers (except for the current element being edited)
+                const existingElement = window.schoolElements.find(el => el.number === number);
+                const currentElement = window.schoolElements.find(el => el.symbol === symbol);
+                
+                if (existingElement && (!currentElement || existingElement.symbol !== symbol)) {
+                    alert(`Element number ${number} is already in use by ${existingElement.name}`);
+                    return;
+                }
+                
+                // Find existing element or create new one
+                let elementIndex = window.schoolElements.findIndex(el => el.symbol === symbol);
+                const elementData = {
+                    number: number,
+                    symbol: symbol,
+                    name: name,
+                    nameBg: name, // Default to same as name
+                    category: category,
+                    location: location || '',
+                    locationBg: location || '',
+                    contact: contact || '',
+                    contactBg: contact || '',
+                    description: description || '',
+                    descriptionBg: description || '',
+                    facts: facts,
+                    factsBg: facts,
+                    schedule: currentElement ? currentElement.schedule : {}
+                };
+                
+                if (elementIndex >= 0) {
+                    // Update existing element
+                    window.schoolElements[elementIndex] = { ...window.schoolElements[elementIndex], ...elementData };
+                    console.log(`✅ Updated element: ${symbol} - ${name}`);
+                } else {
+                    // Add new element
+                    window.schoolElements.push(elementData);
+                    console.log(`✅ Added new element: ${symbol} - ${name}`);
+                }
+                
+                // Sort by number
+                window.schoolElements.sort((a, b) => a.number - b.number);
+                
+                alert('Element saved successfully!');
+                closeElementModal();
+                loadElementsList();
+                loadSubjectOptions();
+                
+                // Update stats
+                updateStats();
+                
+            } catch (error) {
+                console.error('Error saving element:', error);
+                alert('Error saving element. Please check the console for details.');
+            }
+        }
+
+        function saveScheduleSlot() {
+            try {
+                const subject = document.getElementById('modalSubject').value;
+                const day = document.getElementById('modalDay').value;
+                const startTime = document.getElementById('modalStartTime').value;
+                const endTime = document.getElementById('modalEndTime').value;
+                
+                if (!subject || !day || !startTime || !endTime) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                const timeSlot = `${startTime}-${endTime}`;
+                
+                if (typeof schoolElements !== 'undefined') {
+                    const element = schoolElements.find(el => el.symbol === subject);
+                    if (element) {
+                        if (!element.schedule) element.schedule = {};
+                        if (!element.schedule[day]) element.schedule[day] = [];
+                        
+                        if (!element.schedule[day].includes(timeSlot)) {
+                            element.schedule[day].push(timeSlot);
+                            element.schedule[day].sort();
+                            
+                            alert('Schedule slot saved successfully!');
+                            closeScheduleModal();
+                            loadScheduleDisplay();
+                        } else {
+                            alert('This time slot already exists');
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error saving schedule slot:', error);
+                alert('Error saving schedule slot. Please try again.');
+            }
+        }
+
+        function addTimeSlot() {
+            try {
+                const subjectSymbol = document.getElementById('subjectSelect').value;
+                const day = document.getElementById('daySelect').value;
+                const time = document.getElementById('timeInput').value;
+                const duration = document.getElementById('durationSelect').value;
+                
+                if (!subjectSymbol || !day || !time) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                if (typeof schoolElements === 'undefined') {
+                    alert('No elements data available');
+                    return;
+                }
+                
+                // Find the element and add the time slot
+                const element = schoolElements.find(el => el.symbol === subjectSymbol);
+                if (element) {
+                    if (!element.schedule) element.schedule = {};
+                    if (!element.schedule[day]) element.schedule[day] = [];
+                    
+                    const timeSlot = duration ? `${time} (${duration}min)` : time;
+                    
+                    if (!element.schedule[day].includes(timeSlot)) {
+                        element.schedule[day].push(timeSlot);
+                        element.schedule[day].sort(); // Keep times sorted
+                        
+                        // Refresh the schedule display
+                        loadScheduleDisplay();
+                        
+                        // Clear form
+                        document.getElementById('timeInput').value = '';
+                        
+                        alert('Time slot added successfully!');
+                    } else {
+                        alert('This time slot already exists for this subject');
+                    }
+                }
+            } catch (error) {
+                console.error('Error adding time slot:', error);
+                alert('Error adding time slot. Please try again.');
+            }
+        }
+
+        function deleteElementConfirm(symbol) {
+            if (confirm(`Are you sure you want to delete element "${symbol}"?`)) {
+                deleteElementBySymbol(symbol);
+            }
+        }        function deleteElementBySymbol(symbol) {
+            try {
+                if (typeof window.schoolElements !== 'undefined') {
+                    const index = window.schoolElements.findIndex(el => el.symbol === symbol);
+                    if (index >= 0) {
+                        const deletedElement = window.schoolElements[index];
+                        window.schoolElements.splice(index, 1);
+                        console.log(`🗑️ Deleted element: ${symbol} - ${deletedElement.name}`);
+                        alert('Element deleted successfully!');
+                        loadElementsList();
+                        loadSubjectOptions();
+                        updateStats();
+                    } else {
+                        alert('Element not found!');
+                    }
+                } else {
+                    alert('No elements data available!');
+                }
+            } catch (error) {
+                console.error('Error deleting element:', error);
+                alert('Error deleting element. Please check the console for details.');
+            }
+        }
+
+        function deleteElement() {
+            const symbol = document.getElementById('modalElementSymbol').value;
+            if (symbol && confirm(`Are you sure you want to delete element "${symbol}"?`)) {
+                deleteElementBySymbol(symbol);
+                closeElementModal();
+            }
+        }
+
+        // Filter and Search Functions
+        function filterElements() {
+            const searchTerm = document.getElementById('elementSearch').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            
+            const cards = document.querySelectorAll('.element-card');
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const matchesSearch = !searchTerm || text.includes(searchTerm);
+                const matchesCategory = !categoryFilter || text.includes(categoryFilter);
+                
+                card.style.display = (matchesSearch && matchesCategory) ? 'block' : 'none';
+            });
+        }
+
+        function sortElements() {
+            const sortBy = document.getElementById('sortBy').value;
+            if (typeof schoolElements !== 'undefined') {
+                schoolElements.sort((a, b) => {
+                    switch (sortBy) {
+                        case 'name':
+                            return a.name.localeCompare(b.name);
+                        case 'symbol':
+                            return a.symbol.localeCompare(b.symbol);
+                        case 'category':
+                            return a.category.localeCompare(b.category);
+                        default:
+                            return a.number - b.number;
+                    }
+                });
+                loadElementsList();
+            }
+        }
+
+        // Class Management Functions
+        function addClass() {
+            try {
+                const className = document.getElementById('modalClassName').value.trim();
+                const classTeacher = document.getElementById('modalClassTeacher').value.trim();
+                const classRoom = document.getElementById('modalClassRoom').value.trim();
+                
+                if (!className || !classTeacher || !classRoom) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                if (typeof schoolClasses === 'undefined') {
+                    window.schoolClasses = [];
+                }
+                
+                // Add new class
+                const classId = Date.now();
+                const newClass = {
+                    id: classId,
+                    name: className,
+                    teacher: classTeacher,
+                    room: classRoom,
+                    schedule: []
+                };
+                
+                schoolClasses.push(newClass);
+                
+                alert('Class added successfully!');
+                closeClassModal();
+                loadClassesList();
+                
+            } catch (error) {
+                console.error('Error adding class:', error);
+                alert('Error adding class. Please try again.');
+            }
+        }
+
+        function saveClass() {
+            try {
+                const classId = document.getElementById('modalClassId').value;
+                const className = document.getElementById('modalClassName').value.trim();
+                const classTeacher = document.getElementById('modalClassTeacher').value.trim();
+                const classRoom = document.getElementById('modalClassRoom').value.trim();
+                
+                if (!classId || !className || !classTeacher || !classRoom) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                if (typeof schoolClasses === 'undefined') {
+                    window.schoolClasses = [];
+                }
+                
+                // Find and update class
+                const classIndex = schoolClasses.findIndex(c => c.id == classId);
+                if (classIndex >= 0) {
+                    schoolClasses[classIndex].name = className;
+                    schoolClasses[classIndex].teacher = classTeacher;
+                    schoolClasses[classIndex].room = classRoom;
+                }
+                
+                alert('Class saved successfully!');
+                closeClassModal();
+                loadClassesList();
+                
+            } catch (error) {
+                console.error('Error saving class:', error);
+                alert('Error saving class. Please try again.');
+            }
+        }
+
+        function deleteClass(classId) {
+            if (confirm('Are you sure you want to delete this class?')) {
+                if (typeof schoolClasses !== 'undefined') {
+                    schoolClasses = schoolClasses.filter(c => c.id != classId);
+                    alert('Class deleted successfully!');
+                    loadClassesList();
+                }
+            }
+        }
+
+        // Modal helper functions
+        function closeResourceModal() {
+            document.getElementById('resourceModal').style.display = 'none';
+        }
+
+        function closeEventModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        // Enhanced Schedule Functions
+        function loadScheduleTable() {
+            const tbody = document.querySelector('#schedule-table tbody');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            // Load schedule data and display in table format
+            if (typeof schoolElements !== 'undefined') {
+                schoolElements.forEach(element => {
+                    if (element.schedule) {
+                        Object.entries(element.schedule).forEach(([day, times]) => {
+                            times.forEach(time => {
+                                const row = document.createElement('tr');
+                                const categoryColor = colorCategories[element.category]?.primary || '#007bff';
+                                
+                                row.innerHTML = `
+                                    <td><span class="admin-subject-badge subject-badge" style="background-color: ${categoryColor}">${element.name}</span></td>
+                                    <td>${element.category}</td>
+                                    <td>${day}</td>
+                                    <td>${time}</td>
+                                    <td>${element.location || 'TBA'}</td>
+                                    <td>${element.contact || 'TBA'}</td>
+                                    <td>
+                                        <button class="btn btn-sm" onclick="editScheduleItem('${element.symbol}', '${day}', '${time}')">Edit</button>
+                                    </td>
+                                `;
+                                tbody.appendChild(row);
+                            });
+                        });
+                    }
+                });
+            }
+        }
+
+        function filterSchedule() {
+            const categoryFilter = document.getElementById('schedule-category-filter').value;
+            const teacherFilter = document.getElementById('schedule-teacher-filter').value.toLowerCase();
+            const roomFilter = document.getElementById('schedule-room-filter').value.toLowerCase();
+            
+            const rows = document.querySelectorAll('#schedule-table tbody tr');
+            
+            rows.forEach(row => {
+                const category = row.cells[1].textContent;
+                const teacher = row.cells[5].textContent.toLowerCase();
+                const room = row.cells[4].textContent.toLowerCase();
+                
+                const categoryMatch = !categoryFilter || category === categoryFilter;
+                const teacherMatch = !teacherFilter || teacher.includes(teacherFilter);
+                const roomMatch = !roomFilter || room.includes(roomFilter);
+                
+                row.style.display = (categoryMatch && teacherMatch && roomMatch) ? '' : 'none';
+            });
+        }
+
+        function exportSchedule() {
+            try {
+                const scheduleData = [];
+                const rows = document.querySelectorAll('#schedule-table tbody tr');
+                
+                rows.forEach(row => {
+                    if (row.style.display !== 'none') {
+                        scheduleData.push({
+                            subject: row.cells[0].textContent,
+                            category: row.cells[1].textContent,
+                            day: row.cells[2].textContent,
+                            time: row.cells[3].textContent,
+                            room: row.cells[4].textContent,
+                            teacher: row.cells[5].textContent
+                        });
+                    }
+                });
+
+                const dataStr = JSON.stringify(scheduleData, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                
+                const exportFileDefaultName = `himiq-schedule-${new Date().toISOString().split('T')[0]}.json`;
+                
+                const linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+                
+                alert('Schedule exported successfully!');
+            } catch (error) {
+                console.error('Error exporting schedule:', error);
+                alert('Error exporting schedule. Please try again.');
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {            try {
+                console.log('Admin panel initializing...');
+                
+                // Load initial data first
+                loadInitialData();
+                
+                // Load configuration first
+                loadConfiguration();
+                  // Load initial data
+                loadScheduleDisplay();
+                loadSubjectOptions();
+                loadElementsList();
+                loadColorCategories();
+                loadResources();
+                loadEvents();
+                loadScheduleTable();
+                updateStats();
+                
+                // Setup modal click handlers
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            modal.style.display = 'none';
+                        }
+                    });
+                });
+                
+                // Setup form validation
+                const forms = document.querySelectorAll('form');
+                forms.forEach(form => {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                    });
+                });
+                  console.log('Admin panel initialized successfully');
+            } catch (error) {
+                console.error('Error initializing admin panel:', error);
+            }
+        });
+
+        // Missing functions for admin panel
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            const themeButton = document.querySelector('.theme-toggle');
+            if (themeButton) {
+                themeButton.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+            }
+            
+            console.log(`🎨 Admin theme set to: ${theme}`);
+        }
+
+        function editScheduleItem(elementSymbol, day, time) {
+            // Find the element and open edit modal
+            if (typeof schoolElements !== 'undefined') {
+                const element = schoolElements.find(el => el.symbol === elementSymbol);
+                if (element) {
+                    // Pre-fill the schedule modal with existing data
+                    document.getElementById('modalSubject').value = elementSymbol;
+                    document.getElementById('modalDay').value = day;
+                    
+                    // Parse time range if it exists
+                    const timeParts = time.split('-');
+                    if (timeParts.length === 2) {
+                        document.getElementById('modalStartTime').value = timeParts[0];
+                        document.getElementById('modalEndTime').value = timeParts[1];
+                    }
+                    
+                    openScheduleModal();
+                }
+            }
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+        });        // Load schoolElements from main.js if available
+        if (typeof window.schoolElements !== 'undefined') {
+            window.schoolElements = window.schoolElements;
+        }
+
+        // Load initial demo data if no data exists
+        function loadInitialData() {
+            if (typeof window.schoolElements === 'undefined' || window.schoolElements.length === 0) {
+                window.schoolElements = [
+                    { number: 1, symbol: 'Ma', name: 'Mathematics', category: 'science', contact: 'Dr. Smith', location: 'Room 201', description: 'Advanced mathematics courses', facts: ['Founded in 1990', 'Award-winning department'] },
+                    { number: 2, symbol: 'En', name: 'English', category: 'humanities', contact: 'Ms. Johnson', location: 'Room 105', description: 'English language and literature', facts: ['Native speaker teachers', 'International curriculum'] },
+                    { number: 3, symbol: 'Sp', name: 'Sports', category: 'sports', contact: 'Coach Wilson', location: 'Gymnasium', description: 'Physical education and sports', facts: ['Olympic-size pool', 'Professional coaching staff'] },
+                    { number: 4, symbol: 'Re', name: 'Respect', category: 'values', contact: 'Admin', location: 'School-wide', description: 'Core school value of mutual respect', facts: ['Peer mediation program', 'Anti-bullying initiatives'] },
+                    { number: 5, symbol: 'Sc', name: 'Science Fair', category: 'events', contact: 'Event Team', location: 'Main Hall', description: 'Annual science fair competition', facts: ['Over 200 projects yearly', 'International judges'] },
+                    { number: 6, symbol: 'Ad', name: 'Administration', category: 'admin', contact: 'Principal', location: 'Main Office', description: 'School administration and management', facts: ['24/7 support', 'Modern management systems'] }
+                ];
+            }
+        }
+
+        // Color Management Functions
+        function loadColorCategories() {
+            const defaultCategories = {
+                science: { name: 'Science & Technology', color: '#ff4757', bgColor: '#ffeaa7', textColor: '#2d3436', icon: '🔬' },
+                humanities: { name: 'Humanities & Languages', color: '#3742fa', bgColor: '#a29bfe', textColor: '#ffffff', icon: '📚' },
+                sports: { name: 'Sports & Activities', color: '#2ed573', bgColor: '#00cec9', textColor: '#ffffff', icon: '⚽' },
+                values: { name: 'School Values', color: '#ffa502', bgColor: '#fdcb6e', textColor: '#2d3436', icon: '💎' },
+                events: { name: 'Events & Clubs', color: '#a55eea', bgColor: '#fd79a8', textColor: '#ffffff', icon: '🎉' },
+                admin: { name: 'Administration', color: '#747d8c', bgColor: '#636e72', textColor: '#ffffff', icon: '🏢' }
+            };
+
+            const savedCategories = localStorage.getItem('colorCategories');
+            const categories = savedCategories ? JSON.parse(savedCategories) : defaultCategories;
+            
+            const container = document.getElementById('colorCategoriesContainer');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            Object.entries(categories).forEach(([id, category]) => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'color-category-card';
+                categoryCard.innerHTML = `
+                    <div class="color-preview" style="background-color: ${category.color}"></div>
+                    <div class="color-details">
+                        <h4>${category.icon} ${category.name}</h4>
+                        <div class="color-inputs">
+                            <input type="color" value="${category.color}" onchange="updateCategoryColor('${id}', 'color', this.value)">
+                            <input type="color" value="${category.bgColor}" onchange="updateCategoryColor('${id}', 'bgColor', this.value)">
+                            <input type="color" value="${category.textColor}" onchange="updateCategoryColor('${id}', 'textColor', this.value)">
+                        </div>
+                    </div>
+                    <button class="btn btn-danger btn-small" onclick="deleteCategoryColor('${id}')">Delete</button>
+                `;
+                container.appendChild(categoryCard);
+            });
+        }
+
+        function updateCategoryColor(categoryId, colorType, newColor) {
+            try {
+                const savedCategories = localStorage.getItem('colorCategories');
+                const categories = savedCategories ? JSON.parse(savedCategories) : {};
+                
+                if (!categories[categoryId]) return;
+                
+                categories[categoryId][colorType] = newColor;
+                localStorage.setItem('colorCategories', JSON.stringify(categories));
+                
+                // Update preview
+                loadColorCategories();
+            } catch (error) {
+                console.error('Error updating category color:', error);
+            }
+        }
+
+        function addNewColorCategory() {
+            try {
+                const name = document.getElementById('newCategoryName').value.trim();
+                const id = document.getElementById('newCategoryId').value.trim();
+                const color = document.getElementById('newCategoryColor').value;
+                const bgColor = document.getElementById('newCategoryBgColor').value;
+                const textColor = document.getElementById('newCategoryTextColor').value;
+                const icon = document.getElementById('newCategoryIcon').value.trim();
+                const description = document.getElementById('newCategoryDescription').value.trim();
+                
+                if (!name || !id) {
+                    alert('Please fill in at least the name and ID fields');
+                    return;
+                }
+                
+                const savedCategories = localStorage.getItem('colorCategories');
+                const categories = savedCategories ? JSON.parse(savedCategories) : {};
+                
+                if (categories[id]) {
+                    alert('Category ID already exists. Please choose a different ID.');
+                    return;
+                }
+                
+                categories[id] = {
+                    name: name,
+                    color: color,
+                    bgColor: bgColor,
+                    textColor: textColor,
+                    icon: icon || '🎨',
+                    description: description
+                };
+                
+                localStorage.setItem('colorCategories', JSON.stringify(categories));
+                loadColorCategories();
+                resetNewCategoryForm();
+                alert('New category added successfully!');
+                
+            } catch (error) {
+                console.error('Error adding new category:', error);
+                alert('Error adding new category. Please try again.');
+            }
+        }
+
+        function resetNewCategoryForm() {
+            document.getElementById('newCategoryName').value = '';
+            document.getElementById('newCategoryId').value = '';
+            document.getElementById('newCategoryColor').value = '#e74c3c';
+            document.getElementById('newCategoryBgColor').value = '#fef2f2';
+            document.getElementById('newCategoryTextColor').value = '#2d3748';
+            document.getElementById('newCategoryIcon').value = '';
+            document.getElementById('newCategoryDescription').value = '';
+        }
+
+        function saveColorCategory() {
+            try {
+                const savedCategories = localStorage.getItem('colorCategories');
+                if (savedCategories) {
+                    // Export to CSS variables or apply to elements
+                    const categories = JSON.parse(savedCategories);
+                    Object.entries(categories).forEach(([id, category]) => {
+                        document.documentElement.style.setProperty(`--color-${id}`, category.color);
+                        document.documentElement.style.setProperty(`--bg-${id}`, category.bgColor);
+                        document.documentElement.style.setProperty(`--text-${id}`, category.textColor);
+                    });
+                    alert('Color categories saved and applied successfully!');
+                } else {
+                    alert('No color categories to save.');
+                }
+            } catch (error) {
+                console.error('Error saving color categories:', error);
+                alert('Error saving color categories. Please try again.');
+            }
+        }
+
+        function resetColorCategories() {
+            if (confirm('Are you sure you want to reset all color categories to defaults? This action cannot be undone.')) {
+                localStorage.removeItem('colorCategories');
+                loadColorCategories();
+                alert('Color categories reset to defaults!');
+            }
+        }
+
+        function exportColorScheme() {
+            try {
+                const savedCategories = localStorage.getItem('colorCategories');
+                if (savedCategories) {
+                    const categories = JSON.parse(savedCategories);
+                    const cssOutput = Object.entries(categories).map(([id, category]) => 
+                        `--color-${id}: ${category.color};\n--bg-${id}: ${category.bgColor};\n--text-${id}: ${category.textColor};`
+                    ).join('\n');
+                    
+                    const blob = new Blob([`:root {\n${cssOutput}\n}`], { type: 'text/css' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'himiq-color-scheme.css';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                } else {
+                    alert('No color scheme to export.');
+                }
+            } catch (error) {
+                console.error('Error exporting color scheme:', error);
+                alert('Error exporting color scheme. Please try again.');
+            }
+        }
+
+        function deleteCategoryColor(categoryId) {
+            if (confirm(`Are you sure you want to delete the "${categoryId}" category?`)) {
+                try {
+                    const savedCategories = localStorage.getItem('colorCategories');
+                    const categories = savedCategories ? JSON.parse(savedCategories) : {};
+                    
+                    delete categories[categoryId];
+                    localStorage.setItem('colorCategories', JSON.stringify(categories));
+                    loadColorCategories();
+                    alert('Category deleted successfully!');
+                } catch (error) {
+                    console.error('Error deleting category:', error);
+                    alert('Error deleting category. Please try again.');
+                }            }
+        }
+
+        // Resource Management Functions (stubs)
+        function loadResources() {
+            console.log('📦 Resources loaded (stub implementation)');
+            // Stub implementation - can be expanded later
+            const resourceStats = {
+                total: 0,
+                available: 0,
+                inUse: 0
+            };
+            
+            document.getElementById('total-resources').textContent = resourceStats.total;
+            document.getElementById('available-resources').textContent = resourceStats.available;
+            document.getElementById('in-use-resources').textContent = resourceStats.inUse;
+        }
+
+        function loadEvents() {
+            console.log('🎉 Events loaded (stub implementation)');  
+            // Stub implementation - can be expanded later
+        }
+
+        function showResourceModal() {
+            alert('Resource management feature coming soon!');
+        }
+
+    </script>
+</body>
+</html>

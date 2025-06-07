@@ -1,0 +1,186 @@
+/* Standalone transparent glass search bar */
+.periodic-table-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.search-container {
+  display: flex;
+  max-width: 700px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.search-container input {
+  flex-grow: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.search-container input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-container input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.search-container button {
+  padding: 1rem 1.5rem;
+  background: rgba(0, 212, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.search-container button:hover {
+  background: rgba(0, 212, 255, 1);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+}
+
+.sort-controls select {
+  padding: 0.6rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.sort-controls select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .periodic-table-controls {
+    padding: 0 1rem;
+  }
+  
+  .search-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .search-container input {
+    padding: 0.875rem 1.25rem;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  .search-container button {
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container input {
+    padding: 0.75rem 1rem;
+    font-size: 16px;
+  }
+  
+  .search-container button {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Element highlight effect when found in search */
+.element.highlight {
+  animation: pulse 1.5s infinite;
+  z-index: 10;
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 212, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 212, 255, 0);
+  }
+}
+
+.search-feedback {
+  margin-top: 8px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.search-feedback.success {
+  background-color: rgba(46, 213, 115, 0.2);
+  color: var(--sports);
+}
+
+.search-feedback.warning {
+  background-color: rgba(255, 165, 2, 0.2);
+  color: var(--values);
+}
+
+/* Animation for elements when they match search */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "symbol": "PR",
+    "name": "Programming",
+    "description": "Explore our comprehensive programming courses.",
+    "category": "blue"
+  },
+  {
+    "symbol": "EL",
+    "name": "Electronics Lab",
+    "description": "Hands-on experience in our state-of-the-art electronics lab.",
+    "category": "green"
+  },
+  {
+    "symbol": "RE",
+    "name": "Renewable Energy",
+    "description": "Innovative approaches to sustainable energy solutions.",
+    "category": "green"
+  }
+]

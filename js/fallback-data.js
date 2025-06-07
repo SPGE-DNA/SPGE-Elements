@@ -1,0 +1,180 @@
+// Fallback data for CORS errors when loading from file:// protocol
+// This provides default data when the app can't fetch school-data.json due to CORS restrictions
+
+const fallbackSchoolData = {
+  "elements": [
+    {
+      "symbol": "Bg",
+      "name": "Bulgarian Language",
+      "nameBg": "Български език",
+      "category": "humanities",
+      "number": 1,
+      "location": "Room 4.1",
+      "locationBg": "Стая 4.1",
+      "gridPosition": { "row": 1, "column": 1 },
+      "contact": "Анна Н. Александрова",
+      "description": "Study of Bulgarian language, literature, and cultural heritage. Chemistry connection: Analysis of language structure is like molecular composition - understanding the basic elements that create complex meanings.",
+      "descriptionBg": "Изучаване на български език, литература и културно наследство. Връзка с химията: Анализът на езиковата структура е като молекулен състав - разбиране на основните елементи, които създават сложни значения.",
+      "chemistryRelation": "Language analysis mirrors chemical composition - both study how basic elements combine to create complex structures"
+    },
+    {
+      "symbol": "En",
+      "name": "English Language",
+      "nameBg": "Английски език",
+      "category": "humanities",
+      "number": 2,
+      "location": "Room 2.3",
+      "locationBg": "Стая 2.3",
+      "gridPosition": { "row": 1, "column": 18 },
+      "contact": "Валя М. Касчиева",
+      "description": "English language learning with focus on communication. Chemistry connection: Learning a new language is like chemical synthesis - combining elements to create new compounds of meaning.",
+      "descriptionBg": "Изучаване на английски език с фокус върху комуникацията. Връзка с химията: Изучаването на нов език е като химична синтеза - комбиниране на елементи за създаване на нови съединения от значения.",
+      "chemistryRelation": "Language acquisition resembles chemical synthesis - combining basic elements to form new meaningful compounds"
+    },
+    {
+      "symbol": "Ma",
+      "name": "Mathematics",
+      "nameBg": "Математика",
+      "category": "science",
+      "number": 3,
+      "location": "Room 2.1",
+      "locationBg": "Стая 2.1",
+      "gridPosition": { "row": 2, "column": 1 },
+      "contact": "Адриана С. Йорданова",
+      "description": "Study of numbers, quantities, shapes and patterns. Chemistry connection: Mathematical equations balance like chemical equations - both follow conservation laws and precise stoichiometry.",
+      "descriptionBg": "Изучаване на числа, количества, форми и модели. Връзка с химията: Математическите уравнения се балансират като химичните уравнения - и двете следват закони за запазване и точна стехиометрия.",
+      "chemistryRelation": "Mathematical balance mirrors chemical equation balancing - both require precise proportions and conservation laws"
+    },
+    {
+      "symbol": "Py",
+      "name": "Physics",
+      "nameBg": "Физика",
+      "category": "science",
+      "number": 4,
+      "location": "Room 4.5",
+      "locationBg": "Стая 4.5",
+      "gridPosition": { "row": 2, "column": 2 },
+      "contact": "Мария К. Котева",
+      "description": "Study of matter, energy, and their interactions. Chemistry connection: Physics provides the fundamental forces that govern chemical bonding - electromagnetic interactions create molecular structures.",
+      "descriptionBg": "Изучаване на материята, енергията и техните взаимодействия. Връзка с химията: Физиката предоставя основните сили, които управляват химичните връзки - електромагнитните взаимодействия създават молекулни структури.",
+      "chemistryRelation": "Physics provides the fundamental forces behind chemical bonding and molecular interactions"
+    },
+    {
+      "symbol": "Ch",
+      "name": "Chemistry",
+      "nameBg": "Химия",
+      "category": "science",
+      "number": 5,
+      "location": "Chemistry Lab",
+      "locationBg": "Химична лаборатория",
+      "gridPosition": { "row": 2, "column": 13 },
+      "contact": "Невенка В. Костова",
+      "description": "Study of substances, their properties, and reactions. Chemistry connection: This is the core subject - understanding atomic structure, molecular bonding, and chemical transformations.",
+      "descriptionBg": "Изучаване на вещества, техните свойства и реакции. Връзка с химията: Това е основният предмет - разбиране на атомната структура, молекулното свързване и химичните трансформации.",
+      "chemistryRelation": "Core chemistry subject - the foundation of atomic theory and molecular science"
+    },
+    {
+      "symbol": "Bi",
+      "name": "Biology",
+      "nameBg": "Биология",
+      "category": "science",
+      "number": 6,
+      "location": "Room 3.5",
+      "locationBg": "Стая 3.5",
+      "gridPosition": { "row": 2, "column": 14 },
+      "contact": "Светла Г. Антонова",
+      "description": "Study of living organisms and their interactions. Chemistry connection: Biochemistry is life's chemistry - proteins, DNA, and cellular processes are all chemical reactions in biological systems.",
+      "descriptionBg": "Изучаване на живи организми и техните взаимодействия. Връзка с химията: Биохимията е химията на живота - протеините, ДНК и клетъчните процеси са химични реакции в биологичните системи.",
+      "chemistryRelation": "Biochemistry connects life processes to molecular chemistry - all biological functions are chemical reactions"
+    },
+    {
+      "symbol": "Hi",
+      "name": "History",
+      "nameBg": "История",
+      "category": "humanities",
+      "number": 7,
+      "location": "Room 3.6",
+      "locationBg": "Стая 3.6",
+      "gridPosition": { "row": 2, "column": 15 },
+      "contact": "Магдалена А. Стаменова",
+      "description": "Study of past events and human civilization. Chemistry connection: Historical developments in chemistry shaped civilization - from metallurgy to medicine, chemical discoveries changed human history.",
+      "descriptionBg": "Изучаване на минали събития и човешката цивилизация. Връзка с химията: Историческите развития в химията оформиха цивилизацията - от металургията до медицината, химичните открития промениха човешката история.",
+      "chemistryRelation": "Chemical discoveries throughout history shaped human civilization and technological advancement"
+    },
+    {
+      "symbol": "Ge",
+      "name": "Geography",
+      "nameBg": "География",
+      "category": "humanities",
+      "number": 8,
+      "location": "Room 4.7",
+      "locationBg": "Стая 4.7",
+      "gridPosition": { "row": 2, "column": 16 },
+      "contact": "Златомира Г. Кондзеровска",
+      "description": "Study of Earth's landscapes, environments, and people. Chemistry connection: Earth's geological processes are chemical reactions - rock formation, weathering, and soil chemistry shape our planet.",
+      "descriptionBg": "Изучаване на земните ландшафти, околна среда и хора. Връзка с химията: Геологичните процеси на Земята са химични реакции - образуването на скали, изветрянето и почвената химия оформят нашата планета.",
+      "chemistryRelation": "Earth's geological processes are fundamentally chemical - mineral formation and environmental chemistry"
+    },
+    {
+      "symbol": "Sp",
+      "name": "Physical Education",
+      "nameBg": "Физическо възпитание",
+      "category": "sports",
+      "number": 9,
+      "location": "Sport Center",
+      "locationBg": "Спортен център",
+      "gridPosition": { "row": 2, "column": 17 },
+      "contact": "Станка И. Перфанова",
+      "description": "Development of physical fitness and motor skills. Chemistry connection: Exercise physiology involves chemical processes - oxygen transport, energy metabolism, and muscle chemistry drive athletic performance.",
+      "descriptionBg": "Развитие на физическа форма и двигателни умения. Връзка с химията: Физиологията на упражненията включва химични процеси - транспорт на кислород, енергиен метаболизъм и мускулна химия задвижват спортните постижения.",
+      "chemistryRelation": "Exercise physiology is pure chemistry - oxygen transport, energy metabolism, and muscle biochemistry"
+    },
+    {
+      "symbol": "Te",
+      "name": "Technology and Entrepreneurship",
+      "nameBg": "Технологии и предприемачество",
+      "category": "science",
+      "number": 10,
+      "location": "Innovation Lab",
+      "locationBg": "Иновационна лаборатория",
+      "gridPosition": { "row": 2, "column": 18 },
+      "contact": "Иван С. Димитров",
+      "description": "Innovation, technology development, and business skills. Chemistry connection: Modern technology relies on materials science - semiconductors, polymers, and nanomaterials are all products of chemical engineering.",
+      "descriptionBg": "Иновации, технологично развитие и бизнес умения. Връзка с химията: Съвременната технология разчита на материалознанието - полупроводниците, полимерите и наноматериалите са продукти на химическото инженерство.",
+      "chemistryRelation": "Technology development depends on materials chemistry - semiconductors, polymers, and nanomaterials"
+    },
+    {
+      "symbol": "It",
+      "name": "Information Technology",
+      "nameBg": "Информационни технологии",
+      "category": "science",
+      "number": 11,
+      "location": "Computer Lab",
+      "locationBg": "Компютърна лаборатория",
+      "gridPosition": { "row": 3, "column": 1 },
+      "contact": "Диана Н. Иванова",
+      "description": "Computer science, programming, and digital technologies. Chemistry connection: Computing relies on silicon chemistry - microprocessors are built using chemical processes like doping and etching at the molecular level.",
+      "descriptionBg": "Компютърни науки, програмиране и дигитални технологии. Връзка с химията: Компютрите разчитат на силициевата химия - микропроцесорите се изграждат чрез химични процеси като легиране и ецване на молекулно ниво.",
+      "chemistryRelation": "Computing technology is built on silicon chemistry and semiconductor material science"
+    },
+    {
+      "symbol": "Ph",
+      "name": "Philosophy",
+      "nameBg": "Философия",
+      "category": "humanities",
+      "number": 12,
+      "location": "Room 3.4",
+      "locationBg": "Стая 3.4",
+      "gridPosition": { "row": 3, "column": 2 },
+      "contact": "Петър М. Стойков",
+      "description": "Critical thinking, ethics, and fundamental questions about existence. Chemistry connection: Philosophy of science examines how we understand chemical reality - atomic theory was once philosophical before becoming scientific fact.",
+      "descriptionBg": "Критично мислене, етика и основни въпроси за съществуването. Връзка с химията: Философията на науката изследва как разбираме химическата реалност - атомната теория някога беше философска, преди да стане научен факт.",
+      "chemistryRelation": "Philosophy of science examines how we understand chemical reality and atomic theory"
+    }
+  ],
+  "version": "1.0.1",
+  "lastUpdated": "2025-06-04"
+};
+
+// Make the fallback data available globally
+window.fallbackSchoolData = fallbackSchoolData;

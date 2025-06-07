@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Himiq School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <h1>SPGE Elements</h1>
+      </div>      <nav class="nav">
+        <a href="index.html" class="nav-link" data-lang-key="nav-home">Home</a>
+        <a href="about.html" class="nav-link" data-lang-key="nav-about">About</a>
+        <a href="experiments.html" class="nav-link" data-lang-key="nav-experiments">Experiments</a>
+        <a href="#" class="nav-link active" data-lang-key="nav-contact">Contact</a>        <div class="language-selector">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="bg">БГ</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="contact">
+      <div class="container">
+        <h2 data-lang-key="contact-title">Contact Us</h2>
+        <div class="contact-content">
+          <div class="contact-form">
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone (optional)</label>
+                  <input type="tel" id="phone" name="phone" placeholder="Enter your phone">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help" required></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+          
+          <div class="contact-info">
+            <h3>School Departments</h3>
+            <div class="departments-grid">
+              <div class="info-item">
+                <h4>Main Office</h4>
+                <p>Email: office@spge.edu.bg</p>
+                <p>Phone: +359 2 000 0000</p>
+              </div>
+              <div class="info-item">
+                <h4>Admissions</h4>
+                <p>Email: admissions@spge.edu.bg</p>
+                <p>Phone: +359 2 000 0001</p>
+              </div>
+              <div class="info-item">
+                <h4>IT Department</h4>
+                <p>Email: it@spge.edu.bg</p>
+                <p>Phone: +359 2 000 0002</p>
+              </div>
+              <div class="info-item">
+                <h4>Student Services</h4>
+                <p>Email: students@spge.edu.bg</p>
+                <p>Phone: +359 2 000 0003</p>
+              </div>
+            </div>
+            
+            <div class="location">
+              <h3>Visit Us</h3>
+              <p>Sofia, Bulgaria</p>
+              <div class="map-wrapper">
+                <!-- Placeholder for a map -->
+                <div class="map-placeholder" style="background: #eee; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 15px;">
+                  <p>Interactive Map Coming Soon</p>
+                </div>
+              </div>
+              <div class="transport-info">
+                <h4>How to reach us:</h4>
+                <p>Bus: 280, 94, 102</p>
+                <p>Metro: Line 1, Station "Technical University"</p>
+                <p>Parking: Available on campus</p>
+              </div>
+            </div>
+            
+            <div class="social-info">
+              <h3>Connect With Us</h3>
+              <div class="social-icons">
+                <a href="#" class="social-icon">Facebook</a>
+                <a href="#" class="social-icon">Instagram</a>
+                <a href="#" class="social-icon">LinkedIn</a>
+                <a href="#" class="social-icon">YouTube</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h3>SPGE "John Atanasoff"</h3>
+          <p>The Chemistry of Innovation</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/SPGE-DNA/SPGE-Elements" class="footer-link" target="_blank" rel="noopener">Github</a>
+        </div>
+        <div class="footer-social">
+          <div class="dev-credits">
+            <p><strong>Made by:</strong></p>
+            <p>Ivaylo Popov - main dev</p>
+            <p>Krum Lubomirov - frontend dev</p>
+            <p>Viktor Ludov - Info gatherer, Project leader</p>
+            <p>Ivan Yochev - Info gatherer, backend dev</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SPGE "John Atanasoff". All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/language.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

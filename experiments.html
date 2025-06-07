@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Laboratory - SPGE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+</head>
+<body>  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <h2>🧪 SPGE</h2>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="experiments.html" class="active">Laboratory</a></li>
+      </ul>      <div class="nav-controls">
+        <div class="language-selector">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="bg">БГ</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">    <section class="experiments-intro">
+      <div class="container">
+        <h2 data-lang-key="experiments-title">Virtual Chemistry Laboratory</h2>
+        <p class="lead" data-lang-key="experiments-intro">Explore interactive chemistry experiments from the safety of your browser. Learn fundamental principles through hands-on simulations.</p>
+      </div>
+    </section>
+
+    <section class="experiments-catalog">
+      <div class="container">
+        <h3 data-lang-key="available-experiments">Available Experiments</h3>
+        <div class="experiments-grid">          <div class="experiment-card">
+            <h4>Combustion Analysis</h4>
+            <p>Explore the chemical reaction between fuel and oxygen, and measure the heat released.</p>
+            <button class="experiment-btn" data-experiment="combustion-advanced" data-lang-key="start-experiment">Start Experiment</button>
+          </div>
+          <div class="experiment-card">
+            <h4>Acid-Base Titration</h4>
+            <p>Determine the concentration of an acid or base by adding a solution of known concentration.</p>
+            <button class="experiment-btn" data-experiment="acid-base" data-lang-key="start-experiment">Start Experiment</button>
+          </div>
+          <div class="experiment-card">
+            <h4>Color Change Reactions</h4>
+            <p>Observe and analyze color changes in chemical reactions and learn about indicators.</p>
+            <button class="experiment-btn" data-experiment="color-change" data-lang-key="start-experiment">Start Experiment</button>
+          </div>
+          <div class="experiment-card">
+            <h4>Electrolysis</h4>
+            <p>Study the decomposition of substances using electricity and observe electron transfer.</p>
+            <button class="experiment-btn" data-experiment="electrolysis" data-lang-key="start-experiment">Start Experiment</button>
+          </div>
+          <div class="experiment-card">
+            <h4>Galvanic Cells</h4>
+            <p>Build batteries from chemical reactions and understand electrochemical principles.</p>
+            <button class="experiment-btn" data-experiment="galvanic" data-lang-key="start-experiment">Start Experiment</button>
+          </div>
+          <div class="experiment-card">
+            <h4>Polymer Synthesis</h4>
+            <p>Create polymers through chemical reactions and observe their properties.</p>
+            <button class="experiment-btn" data-experiment="polymer" data-lang-key="start-experiment">Start Experiment</button>
+          </div>
+          <div class="experiment-card">
+            <h4>Chromatography</h4>
+            <p>Separate and analyze mixtures based on different rates of migration.</p>
+            <button class="experiment-btn" data-experiment="chromatography" data-lang-key="start-experiment">Start Experiment</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="laboratory-workspace">
+      <div class="container">
+        <h3>Laboratory Workspace</h3>
+        <div class="workspace-content">          <div class="workspace-header">
+            <h4 id="experimentTitle" data-lang-key="select-experiment">Select an experiment to begin</h4>
+            <div class="workspace-controls">
+              <button id="resetExperiment" class="control-btn" disabled data-lang-key="reset-experiment">Reset</button>
+              <button id="saveResults" class="control-btn" disabled data-lang-key="save-results">Save Results</button>
+              <button id="downloadData" class="control-btn" disabled data-lang-key="download-data">Download Data</button>
+            </div>
+          </div>
+          
+          <div id="experimentWorkspace" class="experiment-workspace">
+            <div class="experiment-placeholder">
+              <p>Select an experiment from the catalog above to begin your virtual lab session</p>
+              <div class="lab-equipment-icons">
+                <!-- Lab equipment illustration -->
+                <span class="equipment">🧪</span>
+                <span class="equipment">🔬</span>
+                <span class="equipment">🧫</span>
+                <span class="equipment">⚗️</span>
+                <span class="equipment">🧑‍🔬</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="data-collection">
+            <h4>Data Collection</h4>
+            <div id="dataCollection" class="data-grid">
+              <!-- Data points will appear here -->
+              <p class="no-data-message">No data collected yet</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-progress">      <div class="container">
+        <h3 data-lang-key="lab-progress">Your Lab Progress</h3>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <div class="progress-stats">            <p data-lang-key="experiments-completed">Experiments Completed: <span id="experimentsCompleted">0</span>/7</p>
+            <p data-lang-key="data-points">Data Points Collected: <span id="dataPointsCollected">0</span></p>
+            <p data-lang-key="achievement-level">Achievement Level: <span id="achievementLevel">Beginner Scientist</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h3>SPGE "John Atanasoff"</h3>
+          <p>The Chemistry of Innovation</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/SPGE-DNA/SPGE-Elements" class="footer-link" target="_blank" rel="noopener">Github</a>
+        </div>
+        <div class="footer-social">
+          <div class="dev-credits">
+            <p><strong>Made by:</strong></p>
+            <p>Ivaylo Popov - main dev</p>
+            <p>Krum Lubomirov - frontend dev</p>
+            <p>Viktor Ludov - Info gatherer, Project leader</p>
+            <p>Ivan Yochev - Info gatherer, backend dev</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SPGE "John Atanasoff". All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Experiment Report Modal -->
+  <div id="reportModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeReportModal">&times;</span>
+      <div class="modal-header">
+        <h3>Experiment Report</h3>
+      </div>
+      <div class="modal-body" id="reportContent">
+        <!-- Report content will be generated dynamically -->
+      </div>
+    </div>
+  </div>
+  <script src="js/language.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/experiments.js"></script>
+  <!-- Add data attributes for Bulgarian translations of experiment descriptions -->
+  <script>
+    // Bulgarian translations for experiment descriptions
+    const experimentDescriptionsBg = {
+      'combustion-advanced': 'Изследвайте химичната реакция между горивото и кислорода и измерете отделената топлина.',
+      'acid-base': 'Определете концентрацията на киселина или основа чрез добавяне на разтвор с известна концентрация.',
+      'color-change': 'Наблюдавайте и анализирайте промените в цвета при химични реакции и научете за индикаторите.',
+      'electrolysis': 'Изучете разлагането на вещества чрез електричество и наблюдавайте пренос на електрони.',
+      'galvanic': 'Изградете батерии от химични реакции и разберете електрохимичните принципи.',
+      'polymer': 'Създайте полимери чрез химични реакции и наблюдайте техните свойства.',
+      'chromatography': 'Разделяйте и анализирайте смеси въз основа на различни скорости на миграция.'
+    };
+    
+    // Apply translations when page loads and when language changes
+    document.addEventListener('DOMContentLoaded', function() {
+      updateExperimentDescriptions();
+    });
+    
+    document.addEventListener('languageChanged', function(e) {
+      updateExperimentDescriptions();
+    });
+    
+    function updateExperimentDescriptions() {
+      const cards = document.querySelectorAll('.experiment-card');
+      const currentLang = getCurrentLanguage ? getCurrentLanguage() : 'en';
+      
+      cards.forEach(card => {
+        const experimentType = card.querySelector('.experiment-btn').dataset.experiment;
+        const descriptionElement = card.querySelector('p');
+        
+        if (currentLang === 'bg' && experimentDescriptionsBg[experimentType]) {
+          descriptionElement.textContent = experimentDescriptionsBg[experimentType];
+        } else {
+          // Reset to English if needed (when switching back from Bulgarian)
+          if (currentLang === 'en') {
+            switch(experimentType) {
+              case 'combustion-advanced':
+                descriptionElement.textContent = 'Explore the chemical reaction between fuel and oxygen, and measure the heat released.';
+                break;
+              case 'acid-base':
+                descriptionElement.textContent = 'Determine the concentration of an acid or base by adding a solution of known concentration.';
+                break;
+              case 'color-change':
+                descriptionElement.textContent = 'Observe and analyze color changes in chemical reactions and learn about indicators.';
+                break;
+              case 'electrolysis':
+                descriptionElement.textContent = 'Study the decomposition of substances using electricity and observe electron transfer.';
+                break;
+              case 'galvanic':
+                descriptionElement.textContent = 'Build batteries from chemical reactions and understand electrochemical principles.';
+                break;
+              case 'polymer':
+                descriptionElement.textContent = 'Create polymers through chemical reactions and observe their properties.';
+                break;
+              case 'chromatography':
+                descriptionElement.textContent = 'Separate and analyze mixtures based on different rates of migration.';
+                break;
+            }
+          }
+        }
+      });
+    }  </script>  <!-- Back to Top Button -->
+  <button id="backToTopBtn" aria-label="Back to top" title="Back to top">
+    <span>↑</span>
+  </button>
+  
+  <!-- Load utility functions -->
+  <script src="js/utilities.js"></script>
+</body>
+</html>

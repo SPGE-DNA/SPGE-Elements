@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  <title>SPGE - The Chemistry of Innovation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">  <link rel="stylesheet" href="css/style.css?v=1.0" />
+  <link rel="stylesheet" href="css/periodic-table.css?v=1.0" />
+  <link rel="stylesheet" href="css/footer.css?v=1.0" />
+  <link rel="stylesheet" href="css/controls.css?v=1.0" />
+  <link rel="stylesheet" href="css/modal.css?v=1.0" />
+  <link rel="stylesheet" href="css/notifications.css?v=1.0" />
+  <style>
+    /* Critical inline CSS to ensure navbar loads */
+    .navbar {
+      position: fixed !important;
+      top: 0 !important;
+      width: 100% !important;
+      background: rgba(10, 10, 10, 0.95) !important;
+      z-index: 1000 !important;
+      padding: 0.5rem 0 !important;
+    }
+    .nav-container {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 1rem 2rem !important;
+      max-width: 1200px !important;
+      margin: 0 auto !important;
+    }
+    .nav-menu {
+      display: flex !important;
+      list-style: none !important;
+      gap: 2rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .nav-menu a {
+      color: #b0b0b0 !important;
+      text-decoration: none !important;
+      padding: 0.5rem 1rem !important;
+    }
+    .nav-controls {
+      display: flex !important;
+      gap: 1rem !important;
+    }    .nav-logo h2 {
+      color: #00d4ff !important;
+      margin: 0 !important;
+      font-size: 1.5rem !important;
+    }
+
+    /* About Section Layout - Text Left, Image Right */
+    .about-content {
+      display: grid !important;
+      grid-template-columns: 2fr 1fr !important;
+      gap: 3rem !important;
+      align-items: center !important;
+      margin-top: 2rem;
+    }
+
+    .about-text {
+      max-width: 100%;
+      padding-right: 1rem;
+    }
+
+    .about-image {
+      justify-self: end !important;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .about-image img {
+      width: 100% !important;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .about-image img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Responsive layout for mobile */
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+
+      .about-image {
+        justify-self: center !important;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <h2>🧪SPGE</h2>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="experiments.html">Laboratory</a></li>
+      </ul>      <div class="nav-controls">
+        <div class="language-selector">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="bg">BG</button>
+        </div>
+      </div>
+      <button class="mobile-menu" aria-label="Toggle mobile menu">☰</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">        <h2 class="hero-title" data-lang-key="hero-title">The Periodic Table of SPGE "John Atanasoff"</h2>
+        <p class="hero-subtitle" data-lang-key="hero-subtitle">Explore the elements that make our school unique through an interactive chemistry-themed experience</p>
+          <!-- Subjects focus on their chemistry connections -->
+        
+        <div class="legend">
+          <h3 data-lang-key="legend-title">Element Categories</h3>
+          <div class="legend-items">
+            <div class="legend-item">
+              <span class="legend-color science"></span>
+              <span data-lang-key="legend-science">Science & Technology</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color humanities"></span>
+              <span data-lang-key="legend-humanities">Humanities & Languages</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color sports"></span>
+              <span data-lang-key="legend-sports">Sports & Activities</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color values"></span>
+              <span data-lang-key="legend-values">School Values</span>
+            </div>            <div class="legend-item">
+              <span class="legend-color events"></span>
+              <span data-lang-key="legend-events">Events & Clubs</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color admin"></span>
+              <span data-lang-key="legend-admin">Administration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>    <!-- Periodic Table Grid -->
+    <section class="periodic-table-section">
+      <div class="container">        <div class="periodic-table-controls">
+          <div class="search-container">
+            <input type="text" id="elementSearch" placeholder="Search for elements..." aria-label="Search for elements" data-lang-key="search-placeholder">
+            <button id="searchButton" aria-label="Search">🔍</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="periodic-table" id="periodicTable" role="grid" aria-label="Periodic Table of School Elements">
+        <!-- Elements will be dynamically generated here -->
+      </div>
+    </section>
+
+    <!-- About Section -->    <section id="about" class="about">
+      <div class="container">
+        <h2 data-lang-key="about-title">About Our School</h2>
+        <div class="about-content">          <div class="about-text">
+            <p data-lang-key="about-text-1">SPGE "John Atanasoff" is a leading technical high school specializing in electronics, programming, and renewable energy. Founded in 1968, our school has been at the forefront of technical education in Bulgaria.</p>
+            <p data-lang-key="about-text-2">Our mission is to prepare the next generation of technology innovators through hands-on learning, industry partnerships, and cutting-edge facilities.</p>
+            <div class="about-cta">
+              <a href="about.html" class="about-btn" data-lang-key="learn-more">
+                <span class="btn-icon">🔬</span>
+                Learn More About Our School
+                <span class="btn-arrow">→</span>
+              </a>
+            </div>
+          </div><div class="about-image">
+            <img src="pics/shcool_pic.jpg" alt="SPGE School Building" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h3>SPGE "John Atanasoff"</h3>
+          <p>The Chemistry of Innovation</p>
+        </div>        <div class="footer-links">
+          <a href="https://github.com/SPGE-DNA/SPGE-Elements" class="footer-link" target="_blank" rel="noopener">Github</a>
+        </div>
+        <div class="footer-social">
+          <div class="dev-credits">
+            <p><strong>Made by:</strong></p>
+            <p>Ivaylo Popov - main dev</p>
+            <p>Krum Lubomirov - frontend dev</p>
+            <p>Viktor Ludov - Info gatherer, Project leader</p>
+            <p>Ivan Yochev - Info gatherer, backend dev</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 SPGE "John Atanasoff". All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- Element Modal -->
+  <div class="modal" id="elementModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <!-- The modal content will be dynamically generated in openElementModal function -->
+    </div>
+  </div>
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" class="back-to-top" aria-label="Back to top">↑</button>  <script src="js/utilities.js"></script>
+  <script src="js/language.js"></script>
+  <script src="js/fallback-data.js"></script>
+  <script src="js/element-position-fallback.js"></script>
+  <script src="js/update-positions.js"></script>
+  <script src="js/periodic-table.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/classrooms.js"></script>
+  <!-- Class management functionality has been removed -->
+  <!-- <script src="js/class-management.js"></script> -->
+</body>
+</html>

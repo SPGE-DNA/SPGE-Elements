@@ -1,0 +1,103 @@
+{
+  "schedules": [
+    {
+      "id": "sch_001",
+      "title": "Grade 10 - Science Stream",
+      "dayOfWeek": "monday",
+      "timeSlot": "08:00-09:00",
+      "subject": "Physics",
+      "teacher": "Dr. Smith",
+      "room": "Lab A",
+      "category": "science",
+      "notes": "Practical session on optics"
+    },
+    {
+      "id": "sch_002",
+      "title": "Grade 10 - Science Stream",
+      "dayOfWeek": "monday",
+      "timeSlot": "09:00-10:00",
+      "subject": "Mathematics",
+      "teacher": "Prof. Johnson",
+      "room": "Room 201",
+      "category": "science",
+      "notes": "Calculus introduction"
+    },
+    {
+      "id": "sch_003",
+      "title": "Grade 10 - Arts Stream",
+      "dayOfWeek": "monday",
+      "timeSlot": "08:00-09:00",
+      "subject": "Literature",
+      "teacher": "Ms. Williams",
+      "room": "Room 105",
+      "category": "humanities",
+      "notes": "Shakespeare analysis"
+    },
+    {
+      "id": "sch_004",
+      "title": "All Grades",
+      "dayOfWeek": "tuesday",
+      "timeSlot": "15:00-16:00",
+      "subject": "Physical Education",
+      "teacher": "Coach Davis",
+      "room": "Gymnasium",
+      "category": "sports",
+      "notes": "Basketball practice"
+    },
+    {
+      "id": "sch_005",
+      "title": "Grade 11 - All Streams",
+      "dayOfWeek": "wednesday",
+      "timeSlot": "10:00-11:00",
+      "subject": "Assembly",
+      "teacher": "Principal",
+      "room": "Main Hall",
+      "category": "values",
+      "notes": "Weekly school assembly"
+    },
+    {
+      "id": "sch_006",
+      "title": "Grade 12 - Science Stream",
+      "dayOfWeek": "thursday",
+      "timeSlot": "14:00-15:00",
+      "subject": "Chemistry Lab",
+      "teacher": "Dr. Brown",
+      "room": "Lab B",
+      "category": "science",
+      "notes": "Organic chemistry experiments"
+    },
+    {
+      "id": "sch_007",
+      "title": "All Grades",
+      "dayOfWeek": "friday",
+      "timeSlot": "16:00-17:00",
+      "subject": "Science Fair Prep",
+      "teacher": "Multiple Teachers",
+      "room": "Various",
+      "category": "events",
+      "notes": "Annual science fair preparation"
+    }
+  ],
+  "timeSlots": [
+    "08:00-09:00",
+    "09:00-10:00",
+    "10:00-11:00",
+    "11:00-12:00",
+    "12:00-13:00",
+    "13:00-14:00",
+    "14:00-15:00",
+    "15:00-16:00",
+    "16:00-17:00"
+  ],
+  "weekDays": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+  "rooms": [
+    "Lab A", "Lab B", "Lab C", "Room 101", "Room 102", "Room 103", 
+    "Room 201", "Room 202", "Room 203", "Gymnasium", "Main Hall", 
+    "Library", "Computer Lab", "Art Studio", "Music Room"
+  ],
+  "teachers": [
+    "Dr. Smith", "Prof. Johnson", "Ms. Williams", "Coach Davis", 
+    "Dr. Brown", "Ms. Garcia", "Mr. Wilson", "Principal", 
+    "Ms. Taylor", "Dr. Anderson"
+  ]
+}
