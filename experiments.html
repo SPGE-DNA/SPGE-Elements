@@ -4,21 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Virtual Laboratory - SPGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/footer.css" />
   <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/experiments.css" />
 </head>
 <body>  <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">
         <h2>🧪 SPGE</h2>
-      </div>
-      <ul class="nav-menu">
+      </div>      <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="experiments.html" class="active">Laboratory</a></li>
-      </ul>      <div class="nav-controls">
+      </ul><div class="nav-controls">
         <div class="language-selector">
           <button class="lang-btn active" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="bg">БГ</button>
@@ -80,11 +79,11 @@
       <div class="container">
         <h3>Laboratory Workspace</h3>
         <div class="workspace-content">          <div class="workspace-header">
-            <h4 id="experimentTitle" data-lang-key="select-experiment">Select an experiment to begin</h4>
-            <div class="workspace-controls">
-              <button id="resetExperiment" class="control-btn" disabled data-lang-key="reset-experiment">Reset</button>
+            <h4 id="experimentTitle" data-lang-key="select-experiment">Select an experiment to begin</h4>            <div class="workspace-controls">
+              <button id="resetWorkspaceExperiment" class="control-btn" disabled data-lang-key="reset-experiment">Reset</button>
               <button id="saveResults" class="control-btn" disabled data-lang-key="save-results">Save Results</button>
-              <button id="downloadData" class="control-btn" disabled data-lang-key="download-data">Download Data</button>
+              <button id="downloadData" class="control-btn" disabled data-lang-key="download-data">Download Data</button>              <button id="testWorkbench" class="control-btn test-workbench-btn" onclick="window.emergencyTest()">🚨 Test Workbench</button>
+              <button id="testDragDrop" class="control-btn test-dragdrop-btn" onclick="window.testDragDrop()">🧪 Test Drag & Drop</button>
             </div>
           </div>
           
@@ -108,12 +107,137 @@
               <!-- Data points will appear here -->
               <p class="no-data-message">No data collected yet</p>
             </div>
+          </div>        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Chemistry Sandbox -->
+    <section class="chemistry-sandbox">
+      <div class="container">
+        <h3 data-lang-key="interactive-sandbox">Interactive Chemistry Sandbox</h3>
+        <p class="sandbox-intro" data-lang-key="sandbox-intro">Drag equipment and chemicals to the workbench to create your own experiments. Mix chemicals, use equipment, and discover reactions!</p>
+        
+        <div class="sandbox-workspace">
+          <!-- Equipment and Chemical Inventory -->
+          <div class="inventory-panel">
+            <h4 data-lang-key="laboratory-inventory">Laboratory Inventory</h4>
+            
+            <div class="inventory-section">
+              <h5 data-lang-key="equipment">Equipment</h5>
+              <div class="inventory-grid equipment-inventory">
+                <div class="inventory-item" data-type="equipment" data-item="beaker" >
+                  <span class="item-icon">🥃</span>
+                  <span class="item-name">Beaker</span>
+                </div>
+                <div class="inventory-item" data-type="equipment" data-item="test-tube" >
+                  <span class="item-icon">🧪</span>
+                  <span class="item-name">Test Tube</span>
+                </div>
+                <div class="inventory-item" data-type="equipment" data-item="burner" >
+                  <span class="item-icon">🔥</span>
+                  <span class="item-name">Bunsen Burner</span>
+                </div>
+                <div class="inventory-item" data-type="equipment" data-item="electrode" >
+                  <span class="item-icon">⚡</span>
+                  <span class="item-name">Electrode</span>
+                </div>
+                <div class="inventory-item" data-type="equipment" data-item="thermometer" >
+                  <span class="item-icon">🌡️</span>
+                  <span class="item-name">Thermometer</span>
+                </div>
+                <div class="inventory-item" data-type="equipment" data-item="pipette" >
+                  <span class="item-icon">💉</span>
+                  <span class="item-name">Pipette</span>
+                </div>
+                <div class="inventory-item" data-type="equipment" data-item="scale" >
+                  <span class="item-icon">⚖️</span>
+                  <span class="item-name">Balance Scale</span>
+                </div>
+                <div class="inventory-item" data-type="equipment" data-item="microscope" >
+                  <span class="item-icon">🔬</span>
+                  <span class="item-name">Microscope</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="inventory-section">
+              <h5 data-lang-key="chemicals">Chemicals</h5>
+              <div class="inventory-grid chemical-inventory">
+                <div class="inventory-item" data-type="chemical" data-item="hcl" >
+                  <span class="item-icon">🧪</span>
+                  <span class="item-name">HCl</span>
+                  <span class="item-info">Hydrochloric Acid</span>
+                </div>
+                <div class="inventory-item" data-type="chemical" data-item="naoh" >
+                  <span class="item-icon">🧪</span>
+                  <span class="item-name">NaOH</span>
+                  <span class="item-info">Sodium Hydroxide</span>
+                </div>
+                <div class="inventory-item" data-type="chemical" data-item="water" >
+                  <span class="item-icon">💧</span>
+                  <span class="item-name">H₂O</span>
+                  <span class="item-info">Distilled Water</span>
+                </div>
+                <div class="inventory-item" data-type="chemical" data-item="nacl" >
+                  <span class="item-icon">🧂</span>
+                  <span class="item-name">NaCl</span>
+                  <span class="item-info">Sodium Chloride</span>
+                </div>
+                <div class="inventory-item" data-type="chemical" data-item="cuso4" >
+                  <span class="item-icon">🔵</span>
+                  <span class="item-name">CuSO₄</span>
+                  <span class="item-info">Copper Sulfate</span>
+                </div>
+                <div class="inventory-item" data-type="chemical" data-item="zn" >
+                  <span class="item-icon">⚪</span>
+                  <span class="item-name">Zn</span>
+                  <span class="item-info">Zinc Metal</span>
+                </div>
+                <div class="inventory-item" data-type="chemical" data-item="phenolphthalein" >
+                  <span class="item-icon">🟣</span>
+                  <span class="item-name">Phenolphthalein</span>
+                  <span class="item-info">pH Indicator</span>
+                </div>
+                <div class="inventory-item" data-type="chemical" data-item="ethanol" >
+                  <span class="item-icon">🍶</span>
+                  <span class="item-name">C₂H₅OH</span>
+                  <span class="item-info">Ethanol</span>
+                </div>
+              </div>
+            </div>
           </div>
+          
+          <!-- Interactive Workbench -->
+          <div class="workbench-container">
+            <h4 data-lang-key="virtual-workbench">Virtual Workbench</h4>
+            <div class="workbench-surface" id="workbenchSurface">
+              <div class="drop-message">
+                <p data-lang-key="drag-items">Drag items from the inventory to start experimenting</p>
+                <div class="drop-icon">↓</div>
+              </div>
+              <div class="workbench-grid"></div>
+            </div>
+            
+            <!-- Reaction Monitor -->
+            <div class="reaction-monitor">
+              <h5 data-lang-key="reaction-monitor">Reaction Monitor</h5>
+              <div id="reactionDisplay" class="reaction-display">
+                <p class="no-reactions" data-lang-key="no-reactions">No active reactions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sandbox Controls -->
+        <div class="sandbox-controls">
+          <button id="clearWorkbench" class="control-btn" data-lang-key="clear-workbench">Clear Workbench</button>
+          <button id="saveExperiment" class="control-btn" data-lang-key="save-experiment">Save Experiment</button>
+          <button id="resetSandbox" class="control-btn" data-lang-key="reset-sandbox">Reset Sandbox</button>
         </div>
       </div>
     </section>
 
-    <section class="lab-progress">      <div class="container">
+    <section class="lab-progress"><div class="container">
         <h3 data-lang-key="lab-progress">Your Lab Progress</h3>
         <div class="progress-container">
           <div class="progress-bar">
@@ -229,7 +353,27 @@
           }
         }
       });
-    }  </script>  <!-- Back to Top Button -->
+    }  </script>  <!-- Experiment Modal -->
+  <div id="experimentModal" class="modal">
+    <div class="modal-content experiment-modal-content">
+      <div class="modal-header">
+        <h2 id="experimentTitle">Experiment</h2>
+        <span class="close-btn" id="closeExperimentModal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div id="experimentArea" class="experiment-area">
+          <!-- Experiment content will be loaded here -->
+        </div>
+        <div class="experiment-controls">
+          <button id="startExperiment" class="btn btn-primary">Start Experiment</button>
+          <button id="resetExperiment" class="btn btn-secondary">Reset</button>
+          <button id="pauseExperiment" class="btn btn-warning experiment-btn-hidden">Pause</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
   <button id="backToTopBtn" aria-label="Back to top" title="Back to top">
     <span>↑</span>
   </button>

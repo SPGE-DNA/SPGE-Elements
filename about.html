@@ -15,8 +15,8 @@
       </div>      <ul class="nav-menu">
         <li><a href="index.html" data-lang-key="nav-home">Home</a></li>
         <li><a href="about.html" class="active" data-lang-key="nav-about">About</a></li>
-        <li><a href="experiments.html" data-lang-key="nav-experiments">Laboratory</a></li>
-      </ul>      <div class="nav-controls">
+        <li><a href="experiments.html" data-lang-key="nav-laboratory">Laboratory</a></li>
+      </ul><div class="nav-controls">
         <div class="language-selector">
           <button class="lang-btn active" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="bg">БГ</button>
@@ -27,10 +27,10 @@
   </nav>
 
   <main class="main-content">    <!-- About Hero Section -->    <section class="hero-section">
-      <div class="hero-content">
-        <h1 data-lang-key="about-title">⚡ About SPGE "Джон Атанасов"</h1>
-        <p class="hero-subtitle" data-lang-key="hero-subtitle">Where Electronics Chemistry Meets Innovation - Synthesizing Technology and Education</p>
-        <p class="hero-description" data-lang-key="about-text-1">Founded in 1968, SPGE "Джон Атанасов" has been conducting electronic synthesis for over 55 years, creating a unique technological compound where programming, electronics, and computer systems form an educational alloy stronger than any individual element.</p>
+      <div class="hero-content centered">
+        <h1 data-lang-key="about-title">About Our School</h1>
+        <p class="hero-subtitle" data-lang-key="hero-subtitle">Explore the elements that make our school unique through an interactive chemistry-themed experience</p>
+        <p class="hero-description" data-lang-key="about-text-1">SPGE "John Atanasoff" is a leading technical high school specializing in electronics, programming, and renewable energy. Founded in 1968, our school has been at the forefront of technical education in Bulgaria.</p>
       </div>
     </section>    <!-- Chemistry Mission Section -->
     <section class="section mission-section">
@@ -72,7 +72,7 @@
                     <div class="atom-mini humanities">C</div>
                     <div class="atom-mini sports">P</div>
                   </div>
-                  <p class="molecule-label">The Silicon Compound of Education</p>
+                  <p class="molecule-label" data-lang-key="education-compound">The Silicon Compound of Education</p>
                 </div>
               </div>
             </div>
@@ -292,41 +292,61 @@
     .mission-section {
       margin-top: 4rem;
       margin-bottom: 4rem;
+      padding: 4rem 0;
     }
     
     .hero-description {
       margin-bottom: 3rem;
-    }    /* Content Grid Layout - Text Left, Image Right */
+    }
+    
+    /* Center hero content */
+    .hero-content.centered {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero-content.centered h1 {
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-content.centered .hero-subtitle {
+      margin-bottom: 1rem;
+    }
+    
+    .hero-content.centered .hero-description {
+      margin-bottom: 2rem;
+    }
+
+    /* Content Grid Layout - Text Left, Image Right */
     .content-grid {
       display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 4rem;
-      align-items: start;
-      margin-top: 2rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
     }
 
     .content-text {
-      max-width: 100%;
+      padding-right: 2rem;
     }
 
     .content-visual {
-      justify-self: center;
-      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .chemistry-facts {
-      margin: 2rem 0;
-    }
-
-    .fact-item {
+      margin-top: 2rem;
+    }    .fact-item {
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
       margin-bottom: 1.5rem;
       padding: 1rem;
       background: var(--surface-color);
       border-radius: 12px;
       border-left: 4px solid var(--accent-primary);
+      gap: 1.5rem;
     }
 
     .fact-icon {
@@ -340,33 +360,37 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }    .school-image-container {
+      font-size: 1.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .school-image-container {
       position: relative;
-      text-align: center;
-      padding: 2rem;
-      border-radius: 15px;
       overflow: hidden;
-    }    .school-image {
+      border-radius: 12px;
+      max-width: 400px;
       width: 100%;
-      max-width: 500px;
+    }
+
+    .school-image {
+      width: 100%;
       height: auto;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: block;
       transition: transform 0.3s ease;
     }
 
     .school-image:hover {
       transform: scale(1.05);
-    }    .image-overlay {
+    }
+
+    .image-overlay {
       position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      padding: 1rem;
-      border-radius: 10px;
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      padding: 2rem;
+      color: white;
     }
 
     .chemistry-badge {
@@ -378,7 +402,9 @@
 
     .molecule-mini {
       display: flex;
+      justify-content: center;
       gap: 0.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .atom-mini {
@@ -388,9 +414,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-weight: bold;
       font-size: 0.8rem;
+      font-weight: bold;
+      color: white;
     }
 
     .atom-mini.science { background: var(--science); }
@@ -402,6 +428,8 @@
       font-style: italic;
       color: white;
       font-size: 0.9rem;
+      margin: 0;
+      text-align: center;
     }
 
     /* Timeline fixes */
@@ -429,6 +457,7 @@
     }
 
     .timeline-item {
+      padding: 1rem 2rem;
       position: relative;
       margin: 3rem 0;
       width: 45%;
@@ -732,7 +761,6 @@
         gap: 1.5rem;
       }
     }
-  </style>
   </style>
   
   <!-- Scripts -->

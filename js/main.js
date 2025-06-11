@@ -112,7 +112,13 @@ function initializeDOMElements() {
 // Create periodic table elements using grid pattern
 function createPeriodicTable() {
   if (!periodicTable) {
-    console.error('❌ Periodic table container not found');
+    // Only log error if we're on a page that should have a periodic table
+    const isPeriodicTablePage = window.location.pathname.includes('index.html') || 
+                               window.location.pathname === '/' || 
+                               window.location.pathname.endsWith('/');
+    if (isPeriodicTablePage) {
+      console.error('❌ Periodic table container not found');
+    }
     return;
   }
   console.log('🔬 Generating periodic table with', schoolElements.length, 'elements');
@@ -827,22 +833,32 @@ document.addEventListener('DOMContentLoaded', function() {
 // Main initialization
 function initializeApp() {
   console.log('🚀 Initializing Himiq School App...');
-  
-  try {
+    try {
     // Initialize DOM elements first
     initializeDOMElements();
     
     // Setup theme early to prevent flash
     setupThemeToggle();
     
-    // Create periodic table
-    createPeriodicTable();
-      // Setup all event listeners    setupEventListeners();
-    setupElementSearch();// Initialize mobile features
+    // Only create periodic table on appropriate pages
+    const isPeriodicTablePage = window.location.pathname.includes('index.html') || 
+                               window.location.pathname === '/' || 
+                               window.location.pathname.endsWith('/');
+    
+    if (isPeriodicTablePage && periodicTable) {
+      // Create periodic table
+      createPeriodicTable();
+      // Setup all event listeners for periodic table
+      setupEventListeners();
+      setupElementSearch();
+    }
+    
+    // Initialize mobile features (available on all pages)
     initMobileMenu();
     initLanguageSelector();
     initNavbarScrollEffect();
-      // Admin panel functionality is separate - no need to initialize here
+    
+    // Admin panel functionality is separate - no need to initialize here
     
     console.log('🎉 Himiq School app initialized successfully!');
   } catch (error) {

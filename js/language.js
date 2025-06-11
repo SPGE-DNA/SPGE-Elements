@@ -6,6 +6,7 @@ const translations = {    // English translations
         "nav-classrooms": "Classrooms",
         "nav-about": "About",
         "nav-experiments": "Experiments",
+        "nav-laboratory": "Laboratory",
         "nav-contact": "Contact",
         
         // Hero section
@@ -24,8 +25,10 @@ const translations = {    // English translations
         
         // About section
         "about-title": "About Our School",
+        "hero-subtitle": "Explore the elements that make our school unique through an interactive chemistry-themed experience",
         "about-text-1": "SPGE \"John Atanasoff\" is a leading technical high school specializing in electronics, programming, and renewable energy. Founded in 1968, our school has been at the forefront of technical education in Bulgaria.",
         "about-text-2": "Our mission is to prepare the next generation of technology innovators through hands-on learning, industry partnerships, and cutting-edge facilities.",
+        "education-compound": "The Silicon Compound of Education",
         
         // Modal
         "modal-location": "Location:",
@@ -111,10 +114,23 @@ const translations = {    // English translations
         "values-title": "Our Electronic Core Values",
         "facts-title": "Electronic Fun Facts About SPGE",
         "contact-lab-title": "Visit Our Electronic Laboratory",
-        
-        // Class selector translations
+          // Class selector translations
         "select-class": "Select Your Class",
-        "all-classes": "All Classes"
+        "all-classes": "All Classes",
+        
+        // Interactive Sandbox translations
+        "interactive-sandbox": "Interactive Chemistry Sandbox",
+        "sandbox-intro": "Drag equipment and chemicals to the workbench to create your own experiments. Mix chemicals, use equipment, and discover reactions!",
+        "laboratory-inventory": "Laboratory Inventory",
+        "equipment": "Equipment",
+        "chemicals": "Chemicals",
+        "virtual-workbench": "Virtual Workbench",
+        "drag-items": "Drag items from the inventory to start experimenting",
+        "reaction-monitor": "Reaction Monitor",
+        "no-reactions": "No active reactions",
+        "clear-workbench": "Clear Workbench",
+        "save-experiment": "Save Experiment",
+        "reset-sandbox": "Reset Sandbox"
     },
       // Bulgarian translations
     bg: {
@@ -123,6 +139,7 @@ const translations = {    // English translations
         "nav-classrooms": "Класни стаи",
         "nav-about": "За нас",
         "nav-experiments": "Експерименти",
+        "nav-laboratory": "Лаборатория",
         "nav-contact": "Контакти",
         
         // Hero section
@@ -261,10 +278,23 @@ const translations = {    // English translations
         "fact-workstations-desc": "107 PC работни станции в 9 компютърни лаборатории образуват нашата кристална решетка от интерактивно обучение и практически експерименти.",
         "fact-foundation-desc": "От 1968 г. непрекъснато катализираме електронното образование, трансформирайки суровите студентски умове в рафинирани технологични професионалисти.",
         "fact-siemens-desc": "4-то място от 1,400 отбора в международния конкурс Siemens доказа високата реактивност и проводимост на нашите студентски таланти.",
-        
-        // Class selector translations
+          // Class selector translations
         "select-class": "Изберете вашия клас",
-        "all-classes": "Всички класове"
+        "all-classes": "Всички класове",
+        
+        // Interactive Sandbox translations
+        "interactive-sandbox": "Интерактивна химическа лаборатория",
+        "sandbox-intro": "Плъзгайте оборудване и химикали върху работната маса, за да създадете собствени експерименти. Смесвайте химикали, използвайте оборудване и открийте реакции!",
+        "laboratory-inventory": "Лабораторен инвентар",
+        "equipment": "Оборудване",
+        "chemicals": "Химикали",
+        "virtual-workbench": "Виртуална работна маса",
+        "drag-items": "Плъзгайте елементи от инвентара, за да започнете експериментиране",
+        "reaction-monitor": "Монитор за реакции",
+        "no-reactions": "Няма активни реакции",
+        "clear-workbench": "Изчисти работната маса",
+        "save-experiment": "Запази експеримента",
+        "reset-sandbox": "Нулирай лабораторията"
     }
 };
 
